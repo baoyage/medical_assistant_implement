@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="insurance_list">
+        <item>No Insurance</item>
+        <item>AARP</item>
+        <item>Aetna</item>
+        <item>American Family Insurance</item>
+        <item>American National Insurance Company</item>
+        <item>Amerigroup</item>
+        <item>Anthem</item>
+        <item>Blue Cross and Blue Shield Association</item>
+        <item>CareSource</item>
+        <item>Cambia Health Solutions</item>
+        <item>Centene Corporation</item>
+        <item>Cigna</item>
+        <item>Coventry Health Care</item>
+        <item>Delta Dental</item>
+        <item>EmblemHealth</item>
+        <item>Fortis</item>
+        <item>Geisinger</item>
+        <item>Golden Rule Insurance Company</item>
+        <item>Group Health Cooperative</item>
+        <item>Group Health Incorporated</item>
+        <item>Harvard Pilgrim Health Care</item>
+        <item>Health Net</item>
+        <item>HealthMarkets</item>
+        <item>HealthPartners</item>
+        <item>HealthSpring</item>
+        <item>Highmark</item>
+        <item>Horace Mann Educators Corporation</item>
+        <item>Humana</item>
+        <item>Independence Blue Cross</item>
+        <item>Kaiser Permanente</item>
+        <item>Kaleida Health</item>
+        <item>Liberty Medical</item>
+        <item>LifeWise Health Plan of Oregon</item>
+        <item>MassHealth</item>
+        <item>Medica</item>
+        <item>Medical Mutual of Ohio</item>
+        <item>MEGA Life and Health Insurance</item>
+        <item>Molina Healthcare</item>
+        <item>Oscar Health</item>
+        <item>Oxford Health Plans</item>
+        <item>Premera Blue Cross</item>
+        <item>Principal Financial Group</item>
+        <item>Shelter Insurance</item>
+        <item>State Farm</item>
+        <item>Thrivent Financial for Lutherans</item>
+        <item>UnitedHealth Group</item>
+        <item>Unitrin</item>
+        <item>Universal American Corporation</item>
+        <item>US Health Group</item>
+        <item>Vantage Health Plan</item>
+        <item>WellCare</item>
+
+    </string-array>
+</resources>

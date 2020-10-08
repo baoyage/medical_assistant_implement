@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="specialties_list">
+        <item>Primary care</item>
+        <item>Accident and emergency medicine</item>
+        <item>Allergology</item>
+        <item>Anaesthetics</item>
+        <item>Cardiology</item>
+        <item>Child psychiatry</item>
+        <item>Clinical biology</item>
+        <item>Clinical chemistry</item>
+        <item>Clinical microbiology</item>
+        <item>Clinical neurophysiology</item>
+        <item>Craniofacial surgery</item>
+        <item>Dermatology</item>
+        <item>Endocrinology</item>
+        <item>Family and General Medicine</item>
+        <item>Gastroenterologic surgery</item>
+        <item>Gastroenterology</item>
+        <item>General Practice</item>
+        <item>General surgery</item>
+        <item>Geriatrics</item>
+        <item>Hematology</item>
+        <item>Immunology</item>
+        <item>Infectious diseases</item>
+        <item>Internal medicine</item>
+        <item>Laboratory medicine</item>
+        <item>Nephrology</item>
+        <item>Neuropsychiatry</item>
+        <item>Neurology</item>
+        <item>Neurosurgery</item>
+        <item>Nuclear medicine</item>
+        <item>Obstetrics and gynaecology</item>
+        <item>Occupational medicine</item>
+        <item>Oncology</item>
+        <item>Ophthalmology</item>
+        <item>Oral and maxillofacial surgery</item>
+        <item>Orthopaedics</item>
+        <item>Otorhinolaryngology</item>
+        <item>Paediatric surgery</item>
+        <item>Paediatrics</item>
+        <item>Pathology</item>
+        <item>Pharmacology</item>
+        <item>Physical medicine and rehabilitation</item>
+        <item>Plastic surgery</item>
+        <item>Podiatric surgery</item>
+        <item>Preventive medicine</item>
+        <item>Psychiatry</item>
+        <item>Public health</item>
+        <item>Radiation Oncology</item>
+        <item>Radiology</item>
+        <item>Respiratory medicine</item>
+        <item>Rheumatology</item>
+        <item>Stomatology</item>
+        <item>Thoracic surgery</item>
+        <item>Tropical medicine</item>
+        <item>Urology</item>
+        <item>Vascular surgery</item>
+        <item>Venereology</item>
+    </string-array>
+
+
+</resources>
