@@ -35,5 +35,25 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    // ViewModel and LiveData
+    // https://developer.android.com/jetpack/androidx/releases/lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
 
+    // Retrofit
+    // https://github.com/square/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    // Glide
+    // https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+//    apply plugin: 'kotlin'
+//    kapt 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

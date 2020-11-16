@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class HomeFragment : Fragment() {
-
+class InquiryFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        activity?.title = "Home"
+//        activity?.title = "Inquiry"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -25,22 +23,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        activity?.title = "Home"
+        return inflater.inflate(R.layout.fragment_inquiry, container, false)
     }
     override fun onResume() {
         super.onResume()
-//        activity?.title = "Home"
+//        activity?.title = "Inquiry"
     }
 
     override fun onDetach() {
@@ -49,9 +36,8 @@ class HomeFragment : Fragment() {
     }
     companion object {
 
-        @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
+            InquiryFragment().apply {
 
             }
     }

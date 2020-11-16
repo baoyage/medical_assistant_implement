@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/userName"
+
+            android:title="User Name"/>
+        <item
+            android:id="@+id/phoneNumber"
+            android:title="Phone Number"/>
+        <item
+            android:id="@+id/email"
+            android:title="Email"/>
+        <item
+            android:id="@+id/changePassword"
+            android:title="Change Password"/>
+        <item
+            android:id="@+id/signOut"
+            android:title="Sign Out"/>
+
+    </group>
+</menu>

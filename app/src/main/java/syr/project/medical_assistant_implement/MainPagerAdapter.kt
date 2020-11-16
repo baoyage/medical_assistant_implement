@@ -1,36 +1,41 @@
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import syr.project.medical_assistant_implement.HomeFragment
 import syr.project.medical_assistant_implement.SettingsFragment
 
 
-
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.viewpager.widget.PagerAdapter
 import com.google.android.material.tabs.TabLayout
+import syr.project.medical_assistant_implement.InquiryFragment
+import syr.project.medical_assistant_implement.MainActivity
 
-class MainPagerAdapter(fragmentManager: FragmentManager, tabLayout: TabLayout?) :
+class MainPagerAdapter(
+    fragmentManager: FragmentManager,
+    tabLayout: TabLayout?,
+
+) :
     androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
     override fun getCount(): Int {
         return 3
     }
 
+
     override fun getItem(position: Int): Fragment {
-        when(position){
-            0->{
+
+        return when (position) {
+            0 -> {
+
                 return HomeFragment()
             }
             1 -> {
-                return HomeFragment()
+                return InquiryFragment()
             }
-            2 -> {
+            else -> {
                 return SettingsFragment()
             }
+
         }
 
-        return HomeFragment()
+
     }
     override fun getPageTitle(position: Int): CharSequence? {
         when(position){
@@ -44,10 +49,12 @@ class MainPagerAdapter(fragmentManager: FragmentManager, tabLayout: TabLayout?) 
                 return "Settings"
             }
 
+
         }
         return null
 
     }
+
 
 }
 
