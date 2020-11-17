@@ -134,6 +134,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/makeAnAppointment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -145,7 +146,6 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:id="@+id/imageView1"
                                 android:layout_width="100dp"
                                 android:layout_height="65dp"
                                 android:layout_weight="1"
@@ -240,6 +240,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/healthInsurance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

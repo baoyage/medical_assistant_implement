@@ -1,18 +1,16 @@
 package syr.project.medical_assistant_implement
 
-import MainPagerAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,12 +21,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         appBar!!.title = "Medical Assistant"
 
         appBar.setDisplayShowHomeEnabled(true)
+//        appBar?.setDisplayHomeAsUpEnabled(true)
 //        appBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#1B82D2")))
         val toggle = ActionBarDrawerToggle(this, mainAct, myToolbar, 0, 0)
         mainAct.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().add(R.id.meContainer, HomeFragment()).commit()
+
+
+
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
@@ -39,11 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 //        when (item.itemId) {
-//            R.id.nav_AboutMe -> {
-//                supportFragmentManager.beginTransaction().add(R.id.meContainer, FrontPageFragment()).commit()
-//            }
-//            R.id.task2 -> {
-//                val intent = Intent(this, Task2Activity::class.java)
+//            R.id.makeAnAppointment -> {
+//                val intent = Intent(this, MakeAnAppointmentActivity::class.java)
 //                intent.putExtra("action", 0)
 //                startActivity(intent)
 //            }
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else
             super.onBackPressed()
     }
+
 
 
 
