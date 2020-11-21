@@ -16,7 +16,7 @@ class InsuranceListAdapter(context: Context
 ): RecyclerView.Adapter<InsuranceListHolder>() {
 
     var insuranceList:Array<String> = context.resources.getStringArray(R.array.insurance_list)
-
+    var myListener: MyItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InsuranceListHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view:View
@@ -24,15 +24,20 @@ class InsuranceListAdapter(context: Context
 
         return InsuranceListHolder(view)
     }
-    override fun getItemViewType(position: Int): Int {
-        return 1
-    }
+
 
     inner class InsuranceListHolder(view: View) : RecyclerView.ViewHolder(view!!) {
         val rVInsurance=view.rVList
-//        init{
-//
-//        }
+        init{
+            view.setOnClickListener{
+                if(myListener!=null){
+                    if(adapterPosition!= RecyclerView.NO_POSITION){
+
+                        myListener!!.onItemClickedFromAdapter()
+                    }
+                }
+            }
+        }
 
 
 
@@ -49,5 +54,11 @@ class InsuranceListAdapter(context: Context
 
     override fun getItemCount(): Int {
         return insuranceList.size
+    }
+    interface MyItemClickListener {
+        fun onItemClickedFromAdapter()
+    }
+    fun setMyItemClickListener(listener: MyItemClickListener) {
+        this.myListener=listener
     }
 }

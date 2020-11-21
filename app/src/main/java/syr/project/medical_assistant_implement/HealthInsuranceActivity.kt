@@ -10,8 +10,10 @@ import kotlinx.android.synthetic.main.activity_health_insurance.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.myToolbar
 
-class HealthInsuranceActivity : AppCompatActivity() {
-    lateinit var myAdapter:InsuranceListAdapter
+class HealthInsuranceActivity : AppCompatActivity() ,HealthInsuranceFragment.OnRecyclerInteractionListener{
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_insurance)
@@ -20,11 +22,7 @@ class HealthInsuranceActivity : AppCompatActivity() {
         appBar!!.title = "Insurance"
 //        appBar.setDisplayShowHomeEnabled(true)
         appBar?.setDisplayHomeAsUpEnabled(true)
-
-        myAdapter= InsuranceListAdapter(this)
-        insuranceRecyclerView.layoutManager= LinearLayoutManager(this)
-        insuranceRecyclerView.adapter=myAdapter
-        insuranceRecyclerView.addItemDecoration(DividerItemDecoration(insuranceRecyclerView.context, DividerItemDecoration.VERTICAL))
+        supportFragmentManager.beginTransaction().add(R.id.insuranceContainer, HealthInsuranceFragment()).commit()
 
 
     }
@@ -38,5 +36,12 @@ class HealthInsuranceActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onInsuranceClicked() {
+        finish()
+//        val appBar = supportActionBar
+//        supportFragmentManager.beginTransaction().replace(R.id.appointmentContainer, DoctorsRecommendedFragment.newInstance()
+//        ).addToBackStack(null).commit()
     }
 }

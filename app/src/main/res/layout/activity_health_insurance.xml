@@ -18,19 +18,9 @@
         app:menu="@menu/toolbar_menu_main"></androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/insuranceContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp"
-        >
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/insuranceRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>

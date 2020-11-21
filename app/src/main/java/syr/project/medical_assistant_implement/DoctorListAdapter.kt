@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.list_doctor.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 import syr.project.medical_assistant_implement.DoctorListAdapter.*
 
@@ -16,7 +17,7 @@ class DoctorListAdapter (context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorListHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View
-        view= layoutInflater.inflate(R.layout.list_item, parent,false)
+        view= layoutInflater.inflate(R.layout.list_doctor, parent,false)
 
         return DoctorListHolder(view)
     }
@@ -24,7 +25,7 @@ class DoctorListAdapter (context: Context
     inner class DoctorListHolder(view: View) : RecyclerView.ViewHolder(view!!) {
 
 
-        val rVSpecialty=view.rVList
+        val rVDoctorName=view.rVDoctorName
         init{
             view.setOnClickListener{
                 if(myListener!=null){
@@ -37,8 +38,8 @@ class DoctorListAdapter (context: Context
         }
     }
     override fun onBindViewHolder(holder: DoctorListHolder, position: Int) {
-        val specialty=DoctorList[position]
-        holder.rVSpecialty.text=specialty
+        val doctorName="Amani"
+        holder.rVDoctorName.text=doctorName
     }
 
     override fun getItemCount(): Int {

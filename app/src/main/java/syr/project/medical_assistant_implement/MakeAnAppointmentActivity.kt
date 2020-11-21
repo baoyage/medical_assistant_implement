@@ -36,4 +36,5 @@ DoctorsRecommendedFragment.OnRecyclerInteractionListener{
         supportFragmentManager.beginTransaction().replace(R.id.appointmentContainer, DoctorSelectedFragment.newInstance()
         ).addToBackStack(null).commit()
     }
+
 }
