@@ -11,6 +11,7 @@
     >
 
     <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/profileImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
@@ -36,11 +37,12 @@
         </TextView>
 
         <TextView
+            android:id="@+id/profileUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FirstName"
-            android:textSize="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2">
+            android:text="UserName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="15dp">
 
         </TextView>
 
@@ -56,6 +58,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/profileEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="xxx@syr.edu"

@@ -2,20 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/userName"
+            android:id="@+id/changeUsername"
 
             android:title="User Name"/>
         <item
-            android:id="@+id/phoneNumber"
+            android:id="@+id/changePhoneNumber"
             android:title="Phone Number"/>
-        <item
-            android:id="@+id/email"
-            android:title="Email"/>
         <item
             android:id="@+id/changePassword"
             android:title="Change Password"/>
         <item
-            android:id="@+id/signOut"
+            android:id="@+id/changeImage"
+
+            android:title="Change image" />
+        <item
+            android:id="@+id/signout"
             android:title="Sign Out"/>
 
     </group>
