@@ -2,10 +2,12 @@ package syr.project.medical_assistant_implement
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_health_insurance.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.myToolbar
@@ -23,6 +25,9 @@ class HealthInsuranceActivity : AppCompatActivity() ,HealthInsuranceFragment.OnR
 //        appBar.setDisplayShowHomeEnabled(true)
         appBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction().add(R.id.insuranceContainer, HealthInsuranceFragment()).commit()
+
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
 
 
     }

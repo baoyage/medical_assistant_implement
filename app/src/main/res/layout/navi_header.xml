@@ -15,7 +15,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/_8"
         app:civ_border_color="#EEEEEE"
         app:civ_border_width="5dp"
         app:civ_shadow="true"
@@ -28,11 +27,12 @@
         android:paddingTop="5dp">
 
         <TextView
+            android:id="@+id/headerTimeGreetings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Good morning, "
-            android:textSize="15dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2">
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="15dp">
 
         </TextView>
 
@@ -61,6 +61,6 @@
         android:id="@+id/profileEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="xxx@syr.edu"
+        android:text="email"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 </LinearLayout>

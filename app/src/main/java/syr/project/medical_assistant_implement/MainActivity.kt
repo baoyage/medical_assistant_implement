@@ -28,6 +28,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.android.synthetic.main.navi_header.view.*
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -47,6 +50,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().add(R.id.meContainer, HomeFragment()).commit()
+
+
+
+
+        val headerView = navView.getHeaderView(0)
+        val headerTimeGreetings=headerView.headerTimeGreetings
+
+        val currentTime= DateTimeFormatter
+            .ofPattern("yyyyMMdd HH:mm")
+            .withLocale(Locale.getDefault())
+            .withZone(ZoneId.systemDefault())
+            .format(Instant.now())
+        val currentHour=currentTime.substring(9,11).toInt()
+        if(currentHour<12){
+            headerTimeGreetings.text="Good morning, "
+        }
+        else if(currentHour<18){
+            headerTimeGreetings.text="Good afternoon, "
+        }
+        else{
+            headerTimeGreetings.text="Good evening, "
+        }
 
 
 

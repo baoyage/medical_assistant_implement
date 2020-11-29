@@ -40,6 +40,7 @@
                         android:paddingTop="5dp">
 
                         <TextView
+                            android:id="@+id/timeGreetings"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Good morning, "
@@ -48,9 +49,10 @@
                         </TextView>
 
                         <TextView
+                            android:id="@+id/homeUsername"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="FirstName"
+                            android:text="Username"
                             android:textSize="15dp">
 
                         </TextView>
@@ -167,6 +169,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/prescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -207,6 +210,7 @@
                     android:paddingTop="40dp">
 
                     <LinearLayout
+                        android:id="@+id/medicalReport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

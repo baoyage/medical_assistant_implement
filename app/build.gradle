@@ -16,8 +16,15 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-    }
 
+
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -61,4 +68,6 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:7.1.0'
     implementation 'com.firebaseui:firebase-ui-database:7.1.0'
     implementation 'com.github.FasterXML:jackson-databind:2.6.0-rc3b'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
 }
