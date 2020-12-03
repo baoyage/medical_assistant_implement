@@ -1,22 +1,29 @@
 package syr.project.medical_assistant_implement
 
+import android.app.DatePickerDialog
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_doctor_selected.*
+import java.text.SimpleDateFormat
+import java.util.*
+import androidx.appcompat.app.AppCompatActivity
 
 
 class DoctorSelectedFragment : Fragment() {
-//    lateinit var myAdapter:DoctorListAdapter
-//    private var listener: DoctorSelectedFragment.OnRecyclerInteractionListener? = null
-//    interface OnRecyclerInteractionListener {
-//        fun onDoctorClicked()
-//    }
-//    override fun onItemClickedFromAdapter(){
-//        listener?.onDoctorClicked()
-//    }
+    lateinit var myAdapter:DoctorListAdapter
+    private var listener: DoctorSelectedFragment.OnRecyclerInteractionListener? = null
+    interface OnRecyclerInteractionListener {
+        fun onDoctorClicked()
+    }
+
+    //override fun onItemClickedFromAdapter(){
+    //    listener?.onDoctorClicked()
+    //}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +31,7 @@ class DoctorSelectedFragment : Fragment() {
         arguments?.let {
 
         }
+        //dateButton.setOnClickListener(ButtonListener())
     }
 
     override fun onCreateView(
@@ -47,6 +55,9 @@ class DoctorSelectedFragment : Fragment() {
         submit.setOnClickListener{
             activity!!.finish()
         }
+        dateButton.setOnClickListener{
+
+        }
 
     }
     companion object {
@@ -59,5 +70,21 @@ class DoctorSelectedFragment : Fragment() {
 
                 }
             }
+    }
+
+    fun showDatePickerDialog(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val calendar: Calendar = Calendar.getInstance()
+            val dialog = DatePickerDialog(context)
+            dialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                val format = SimpleDateFormat("yyyy-MM-dd")
+                textView.setText(format.format(calendar.getTime()))
+                //              textView.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            }
+            val datePicker = dialog.datePicker
+            datePicker.minDate = calendar.getTimeInMillis()
+            dialog.show()
+        }
     }
 }

@@ -14,7 +14,7 @@ DoctorsRecommendedFragment.OnRecyclerInteractionListener{
         val appBar = supportActionBar
         appBar!!.title = "Make an appointment"
         appBar?.setDisplayHomeAsUpEnabled(true)
-        supportFragmentManager.beginTransaction().add(R.id.appointmentContainer, SpecialtyFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.prescriptionContainer, SpecialtyFragment()).commit()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
@@ -28,12 +28,12 @@ DoctorsRecommendedFragment.OnRecyclerInteractionListener{
     }
     override fun onSpecialtyClicked(){
         val appBar = supportActionBar
-        supportFragmentManager.beginTransaction().replace(R.id.appointmentContainer, DoctorsRecommendedFragment.newInstance()
+        supportFragmentManager.beginTransaction().replace(R.id.prescriptionContainer, DoctorsRecommendedFragment.newInstance()
         ).addToBackStack(null).commit()
     }
     override fun onDoctorClicked(){
         val appBar = supportActionBar
-        supportFragmentManager.beginTransaction().replace(R.id.appointmentContainer, DoctorSelectedFragment.newInstance()
+        supportFragmentManager.beginTransaction().replace(R.id.prescriptionContainer, DoctorSelectedFragment.newInstance()
         ).addToBackStack(null).commit()
     }
 

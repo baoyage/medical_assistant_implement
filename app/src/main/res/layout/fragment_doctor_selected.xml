@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_anchorGravity="center"
     tools:context=".DoctorSelectedFragment">
 
     <LinearLayout
@@ -173,13 +174,21 @@
                     android:gravity="center"
                     android:paddingTop="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mon Oct. 5"
-                        android:textSize="18dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    </TextView>
+                        <Button
+                            android:id="@+id/dateButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Choose your date:" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -187,60 +196,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <HorizontalScrollView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <Button
+                            android:id="@+id/timeButton"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingTop="10dp">
+                            android:layout_weight="1"
+                            android:text="Choose your time:" />
+                    </LinearLayout>
 
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="8:00 a.m.">
-
-                            </Button>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="9:00 a.m.">
-
-                            </Button>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="10:00 a.m.">
-
-                            </Button>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="11:00 a.m.">
-
-                            </Button>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12:00 p.m.">
-
-                            </Button>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1:00 p.m.">
-
-                            </Button>
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
                 </LinearLayout>
 
                 <LinearLayout
