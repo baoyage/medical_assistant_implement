@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,18 @@ class DoctorSelectedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_selected, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_doctor_selected, container, false)
+        var input1Text = arguments?.getString("input_1_txt")
+        var input2Text = arguments?.getString("input_2_txt")
+        Log.i(input1Text, "onViewCreated: onViewCreated:")
+//        if(dateChosen!=null){
+//            dateChosen.text=inputText
+//        }
+
+        return rootView
+
+//        return inflater.inflate(R.layout.fragment_doctor_selected, container, false)
+
     }
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +64,14 @@ class DoctorSelectedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var input1Text = arguments?.getString("input_1_txt")
+        var input2Text = arguments?.getString("input_2_txt")
+        dateChosen.text=input1Text
+        timeChosen.text=input2Text
+
+
+
         submit.setOnClickListener{
             activity!!.finish()
         }
@@ -60,6 +80,10 @@ class DoctorSelectedFragment : Fragment() {
 
             // Show the date picker dialog
             DatePickerFragment().show(activity!!.supportFragmentManager, "Date Picker")
+//            var inputText = arguments?.getString("input_txt")
+//            Log.i(inputText, "onViewCreated: onViewCreated:")
+//            dateChosen.text=inputText
+//            Log.i(MakeAnAppointmentActivity().ddd, "onViewCreated: onViewCreated:")
 
         }
         timeButton.setOnClickListener{
@@ -79,19 +103,19 @@ class DoctorSelectedFragment : Fragment() {
             }
     }
 
-    fun showDatePickerDialog(context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val calendar: Calendar = Calendar.getInstance()
-            val dialog = DatePickerDialog(context)
-            dialog.setOnDateSetListener { view, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
-                val format = SimpleDateFormat("yyyy-MM-dd")
-                textView.setText(format.format(calendar.getTime()))
-                //              textView.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-            }
-            val datePicker = dialog.datePicker
-            datePicker.minDate = calendar.getTimeInMillis()
-            dialog.show()
-        }
-    }
+//    fun showDatePickerDialog(context: Context) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            val calendar: Calendar = Calendar.getInstance()
+//            val dialog = DatePickerDialog(context)
+//            dialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+//                calendar.set(year, month, dayOfMonth)
+//                val format = SimpleDateFormat("yyyy-MM-dd")
+//                textView.setText(format.format(calendar.getTime()))
+//                //              textView.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//            }
+//            val datePicker = dialog.datePicker
+//            datePicker.minDate = calendar.getTimeInMillis()
+//            dialog.show()
+//        }
+//    }
 }

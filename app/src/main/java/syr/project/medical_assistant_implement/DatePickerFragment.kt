@@ -11,12 +11,14 @@ import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.fragment_doctor_selected.*
 import java.text.DateFormat
 import java.util.*
 
 class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var calendar: Calendar
+    lateinit var comm: Communicator
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Initialize a calendar instance
@@ -63,11 +65,18 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     // When date set and press ok button in date picker dialog
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        Toast.makeText(
-            activity,
-            "Date Set : ${formatDate(year,month,day)}"
-            , Toast.LENGTH_SHORT
-        ).show()
+//        Toast.makeText(
+//            activity,
+//            "Date Set : ${formatDate(year,month,day)}"
+//            , Toast.LENGTH_SHORT
+//        ).show()
+        comm = activity as Communicator
+        comm.passDataCom(formatDate(year,month,day).toString(),"")
+
+//        MakeAnAppointmentActivity().ddd=formatDate(year,month,day)
+
+//        DoctorSelectedFragment().
+//        dateChosen.text=formatDate(year,month,day)
 
         // Display the selected date in text view
 //        activity!!.findViewById<TextView>(R.id.text_view).text = formatDate(year,month,day)
