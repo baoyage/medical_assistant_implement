@@ -23,23 +23,18 @@ var query = FirebaseDatabase.getInstance()
 class PrescriptionFragment() : Fragment(),
     PrescriptionListAdapter.MyItemClickListener{
     var idx: Int = 0
-    //    private var listener: OnRecyclerInteractionListener? = null
+    private var listener: OnRecyclerInteractionListener? = null
     lateinit var myAdapter: PrescriptionListAdapter
-//    var mL=ArrayList(MovieList().movieList)
 
     //override fun onItemClickedFromAdapter(position: Int) {
-     //   idx = position
-
+    //    idx = position
     //}
-
-    //    interface OnRecyclerInteractionListener {
-//        fun onItemClicked(movie: MovieData,posterid: Int?)
-//
-//    }
-//    fun onItemClickedFromRecyclerViewFragment(movie: MovieData,posterid: Int?) {
-//        listener?.onItemClicked(movie,posterid)
-//    }
-
+    interface OnRecyclerInteractionListener {
+        fun onItemClicked(prescription: PrescriptionData, posterid: Int?)
+    }
+    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData,posterid: Int?) {
+        listener?.onItemClicked(prescription,posterid)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +46,7 @@ class PrescriptionFragment() : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(syr.project.medical_assistant_implement.R.layout.fragment_prescription, container, false)
+        return inflater.inflate(R.layout.fragment_prescription, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,18 +64,14 @@ class PrescriptionFragment() : Fragment(),
             setInterpolator(OvershootInterpolator())
             // Disable the first scroll mode.
             setFirstOnly(false)
-
-
         }
-        prescriptionRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
 
+        prescriptionRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
             addDuration = 1000
             removeDuration = 100
             moveDuration = 1000
             changeDuration = 100
-
         }
-
 
 //        myAdapter.sortItemsByTitle()
 
@@ -104,38 +95,6 @@ class PrescriptionFragment() : Fragment(),
         super.onStop()
         myAdapter.stopListening()
     }
-
-
-
-
-//    @SuppressLint("RestrictedApi")
-//    override fun onOverflowMenuClickedFromAdapter(view: View?, position: Int) {
-//        val popup = PopupMenu(context!!, view!!)
-//        val menuInflater = popup.menuInflater
-//        menuInflater.inflate(R.menu.menu_popup, popup.menu)
-//        popup.setOnMenuItemClickListener {
-//            when(it.itemId){
-//                R.id.action_dup -> {
-//
-//                    myAdapter.duplicateMovie(position)
-//                    return@setOnMenuItemClickListener true
-//                }
-//                R.id.action_rem -> {
-//                    myAdapter.deleteMovies(position)
-//                    return@setOnMenuItemClickListener true
-//                }
-//                else ->{
-//                    return@setOnMenuItemClickListener false
-//                }
-//            }
-//        }
-//        // show icon on the popup menu!!
-//        val menuHelper = MenuPopupHelper(this.context!!, popup.menu as MenuBuilder, view)
-//        menuHelper.setForceShowIcon(true)
-//        menuHelper.gravity = Gravity.END
-//        menuHelper.show()
-//    }
-
 
 //    companion object {
 //

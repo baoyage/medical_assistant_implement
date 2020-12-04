@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_prescription_detail.view.*
 
 class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query: Query):
     FirebaseRecyclerAdapter<PrescriptionData, PrescriptionListAdapter.PrescriptionViewHolder>(
@@ -28,72 +29,33 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVMovieTitle= view?.rVTitle
-        val rVOverview= view?.rVOverview
-
-        val rVposterid= view?.rVPosterid
-        val rVRating= view?.rVRating
-        val rVCheckBox= view?.rVCheckBox
-        val overflow = view?.overflow
-        init{
-            overflow?.setOnClickListener {
-                if(myListener != null){
-                    if(adapterPosition != androidx.recyclerview.widget.RecyclerView.NO_POSITION){
-//                        myListener!!.onOverflowMenuClickedFromAdapter(it, adapterPosition)
-                    }
-                }
-            }
+        val rVPresUsername= view?.PresUsername
+        val rVPresDate= view?.PrescriptionDate
+        val rVPresDoctor= view?.PresDoctor
+        val rVPresSpecialty= view?.PresSpec
+        val rVPresImage= view?.prescriptionImage
         }
 
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrescriptionListAdapter.PrescriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view:View
-        view=when(viewType){
-            1 -> {
-                layoutInflater.inflate(R.layout.movie_list_item_right,parent,false)
-            }
-            2 -> {
-                layoutInflater.inflate(R.layout.movie_list_item_left,parent,false)
-            }
-            else->{
-                layoutInflater.inflate(R.layout.movie_list_item_right,parent,false)
-            }
-        }
-
-        return MovieViewHolder(view)
+        view=layoutInflater.inflate(R.layout.fragment_prescription,parent,false)
+        return PrescriptionViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyFirebaseRecyclerAdapter.MovieViewHolder, position: Int, movie: MovieData) {
-//        val movie=movieList[position]
-        holder.rVMovieTitle!!.text =movie.title
-        holder.rVOverview!!.text=movie.overview
-//        holder.rVposterid!!.setImageResource(posterTable[movie.title]!!)
+    override fun onBindViewHolder(holder: PrescriptionListAdapter.PrescriptionViewHolder, position: Int, prescription: PrescriptionData) {
 
-        val url = "https://image.tmdb.org/t/p/w185/" + movie.poster_path!!
+        holder.rVPresUsername!!.text =prescription.username
+        holder.rVPresDate!!.text=prescription.prescriptiondate
+        holder.rVPresDoctor!!.text=prescription.doctorname
+        holder.rVPresSpecialty!!.text=prescription.specialty
+        val url = prescription.prescriptionpath
 
         val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
-        picasso.load(url).into(holder.rVposterid)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVposterid)
-        holder.rVRating!!.text= movie.vote_average.toString()
-        holder.rVCheckBox!!.isChecked= movie.checked!!
+        picasso.load(url).into(holder.rVPresImage)
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVPresImage)
     }
     private val mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
-    private val mRef = mDatabase.child("movies")
-//    fun duplicateMovie(position: Int){
-//
-//
-//
-//        var movie=movieList[position].copy()
-//
-//        movieList.add(position+1,movie)
-//        notifyItemInserted(position+1)
-//        mRef.child("position").setValue(movie).addOnSuccessListener {
-//            Log.d(TAG, "Insert a new Movie: ${movie.title}")
-//        }
-//
-////        notifyDataSetChanged()
-//
-//    }
+    private val mRef = mDatabase.child("prescription")
 
 }
