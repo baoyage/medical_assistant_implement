@@ -61,9 +61,9 @@ class DoctorSelectedFragment : Fragment() {
             // Show the date picker dialog
             DatePickerFragment().show(activity!!.supportFragmentManager, "Date Picker")
 
-
-
-
+        }
+        timeButton.setOnClickListener{
+            TimePickerFragment().show(activity!!.supportFragmentManager, "Time Picker")
         }
 
     }

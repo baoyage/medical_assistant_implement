@@ -1,21 +1,23 @@
 package syr.project.medical_assistant_implement
 
+import android.R
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.TextView
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import java.text.DateFormat
 import java.util.*
 
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
+class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     private lateinit var calendar: Calendar
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,9 +25,9 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         calendar = Calendar.getInstance()
 
         // Get the system current date
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
 
 
         /*
@@ -49,39 +51,46 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         */
 
         // Initialize a new date picker dialog and return it
-        return DatePickerDialog(
+        return TimePickerDialog(
             activity!!, // Context
             // Put 0 to system default theme or remove this parameter
-            android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, // Theme
-            this, // DatePickerDialog.OnDateSetListener
-            year, // Year
-            month, // Month of year
-            day // Day of month
+            R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, // Theme
+            this,
+            hour,
+            minute,
+            false,
+            // DatePickerDialog.OnDateSetListener
+
+
         )
     }
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
 
+    }
 
     // When date set and press ok button in date picker dialog
-    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        Toast.makeText(
-            activity,
-            "Date Set : ${formatDate(year,month,day)}"
-            , Toast.LENGTH_SHORT
-        ).show()
-
-        // Display the selected date in text view
-//        activity!!.findViewById<TextView>(R.id.text_view).text = formatDate(year,month,day)
-    }
+//    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+//        Toast.makeText(
+//            activity,
+//            "Date Set : ${formatDate(year,month,day)}"
+//            , Toast.LENGTH_SHORT
+//        ).show()
+//
+//        // Display the selected date in text view
+////        activity!!.findViewById<TextView>(R.id.text_view).text = formatDate(year,month,day)
+//    }
 
 
     // Custom method to format date
-    private fun formatDate(year:Int, month:Int, day:Int):String{
-        // Create a Date variable/object with user chosen date
-        calendar.set(year, month, day, 0, 0, 0)
-        val chosenDate = calendar.time
+//    private fun formatDate(hour:Int, minute:Int):String{
+//        // Create a Date variable/object with user chosen date
+//        calendar.set(hour, minute, 0, 0)
+//        val chosenDate = calendar.time
+//
+//        // Format the date picker selected date
+//        val df = DateFormat.getDateInstance(DateFormat.MEDIUM)
+//        return df.format(chosenDate)
+//    }
 
-        // Format the date picker selected date
-        val df = DateFormat.getDateInstance(DateFormat.MEDIUM)
-        return df.format(chosenDate)
-    }
+
 }
