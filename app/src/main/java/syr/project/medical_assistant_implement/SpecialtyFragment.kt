@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_specialty.*
 
 class SpecialtyFragment : Fragment(),SpecialtyListAdapter.MyItemClickListener {
@@ -40,8 +39,8 @@ class SpecialtyFragment : Fragment(),SpecialtyListAdapter.MyItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myAdapter= SpecialtyListAdapter(view.context)
-        specialtyRcyclerView.layoutManager= GridLayoutManager(context,1)
-        specialtyRcyclerView.adapter=myAdapter
+        prescriptionRcyclerView.layoutManager= GridLayoutManager(context,1)
+        prescriptionRcyclerView.adapter=myAdapter
         myAdapter.setMyItemClickListener(this)
 
 
