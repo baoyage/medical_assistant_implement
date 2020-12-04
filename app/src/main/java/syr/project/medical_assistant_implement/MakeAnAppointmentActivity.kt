@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MakeAnAppointmentActivity : AppCompatActivity(), SpecialtyFragment.OnRecyclerInteractionListener,
 DoctorsRecommendedFragment.OnRecyclerInteractionListener{
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_make_an_appointment)
