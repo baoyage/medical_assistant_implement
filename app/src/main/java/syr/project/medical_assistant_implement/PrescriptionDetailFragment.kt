@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.content.Intent
-import android.view.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_prescription_detail.*
-import kotlinx.android.synthetic.main.fragment_prescription_detail.view.*
 import java.io.Serializable
 
 private const val ARG_MOV1 = "prescription"
@@ -41,14 +38,14 @@ class PrescriptionDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PresUsername.text=prescription?.username
-        PrescriptionDate.text=prescription?.prescriptiondate
-        PresDoctor.text=prescription?.doctorname
-        PresSpec.text=prescription?.specialty
+        ReportUsername.text=prescription?.username
+        ReportDate.text=prescription?.prescriptiondate
+        ReportDoctor.text=prescription?.doctorname
+        ReportSpec.text=prescription?.specialty
         val url = prescription?.prescriptionpath
-        val picasso = Picasso.Builder(prescriptionImage.context).listener { _, _, e -> e.printStackTrace() }.build()
-        picasso.load(url).into(prescriptionImage)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(prescriptionImage)
+        val picasso = Picasso.Builder(reportImage.context).listener { _, _, e -> e.printStackTrace() }.build()
+        picasso.load(url).into(reportImage)
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(reportImage)
     }
 
     override fun onDestroy() {

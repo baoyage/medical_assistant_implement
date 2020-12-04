@@ -9,10 +9,10 @@ class PrescriptionActivity : AppCompatActivity(), PrescriptionFragment.OnRecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_make_an_appointment)
+        setContentView(R.layout.activity_prescription)
         setSupportActionBar(myToolbar)
         val appBar = supportActionBar
-        appBar!!.title = "Make an appointment"
+        appBar!!.title = "Prescription"
         appBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction().add(R.id.prescriptionContainer, PrescriptionFragment()).commit()
     }

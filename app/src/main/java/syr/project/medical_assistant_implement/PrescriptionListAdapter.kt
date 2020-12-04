@@ -9,7 +9,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.prescription_itemlist.view.*
 
 class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query: Query):
@@ -29,10 +28,10 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVPresUsername= view?.rVUsername
-        val rVPresDate= view?.rVDate
-        val rVPresSpecialty= view?.rVSpecialty
-        }
+        val rVPresUsername= view?.rVRUsername
+        val rVPresDate= view?.rVRDate
+        val rVPresSpecialty= view?.rVRSpecialty
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrescriptionListAdapter.PrescriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

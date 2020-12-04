@@ -51,7 +51,7 @@
                     android:text="Patient name:" />
 
                 <TextView
-                    android:id="@+id/PresUsername"
+                    android:id="@+id/ReportUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
@@ -73,7 +73,7 @@
                     android:text="Date:" />
 
                 <TextView
-                    android:id="@+id/PrescriptionDate"
+                    android:id="@+id/ReportDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -93,7 +93,7 @@
                     android:text="Doctor:" />
 
                 <TextView
-                    android:id="@+id/PresDoctor"
+                    android:id="@+id/ReportDoctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
@@ -113,7 +113,7 @@
                     android:text="Specialty:" />
 
                 <TextView
-                    android:id="@+id/PresSpec"
+                    android:id="@+id/ReportSpec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -127,11 +127,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/prescriptionImage"
+                    android:id="@+id/reportImage"
                     android:layout_width="219dp"
                     android:layout_height="300dp"
                     android:layout_weight="1"
-                    android:src="@drawable/report" />
+                    android:src="@drawable/report"
+                    app:srcCompat="@drawable/prescription1" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,7 +149,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/prescriptionDownl"
+                        android:id="@+id/reportDownl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"

@@ -5,27 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_report_detail.*
+import java.io.Serializable
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_MOV1 = "report"
+private const val ARG_MOV2 = "reportid"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReportDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReportDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var report: ReportData? = null
+    private var reportid:Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        retainInstance=true
+        //setHasOptionsMenu(true)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            report = it.getSerializable(ARG_MOV1) as ReportData
+            reportid = it.getInt(ARG_MOV2)
         }
     }
 
@@ -37,22 +35,33 @@ class ReportDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_report_detail, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ReportUsername.text=report?.username
+        ReportDate.text=report?.reportdate
+        ReportDoctor.text=report?.doctorname
+        ReportSpec.text=report?.specialty
+        val url = report?.reportpath
+        val picasso = Picasso.Builder(reportImage.context).listener { _, _, e -> e.printStackTrace() }.build()
+        picasso.load(url).into(reportImage)
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(reportImage)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReportDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(report: ReportData, reportid: Int) =
             ReportDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_MOV1, report as Serializable)
+                    putInt(ARG_MOV2, reportid)
                 }
             }
     }

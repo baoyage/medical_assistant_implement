@@ -1,7 +1,6 @@
 package syr.project.medical_assistant_implement
 
 import android.os.Bundle
-import android.view.*
 import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +14,7 @@ import android.view.ViewGroup
 
 import kotlinx.android.synthetic.main.fragment_prescription.*
 
-var query = FirebaseDatabase.getInstance()
+var queryPre = FirebaseDatabase.getInstance()
     .reference
     .child("prescriptions")
     .limitToLast(50)
@@ -51,13 +50,13 @@ class PrescriptionFragment() : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myAdapter= PrescriptionListAdapter(PrescriptionData::class.java,query)
-        prescriptionRcyclerView.layoutManager= GridLayoutManager(context,1)
+        myAdapter= PrescriptionListAdapter(PrescriptionData::class.java,queryPre)
+        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
 //        val myAdapter= MyMovieListAdapter(movieList ,posterTable)
         myAdapter.setMyItemClickListener(this)
-        prescriptionRcyclerView.adapter=myAdapter
+        reportRcyclerView.adapter=myAdapter
         val alphaAdapter = AlphaInAnimationAdapter(myAdapter)
-        prescriptionRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
+        reportRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
             // Change the durations.
             setDuration(1000)
             // Change the interpolator.
@@ -66,7 +65,7 @@ class PrescriptionFragment() : Fragment(),
             setFirstOnly(false)
         }
 
-        prescriptionRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
+        reportRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
             addDuration = 1000
             removeDuration = 100
             moveDuration = 1000
