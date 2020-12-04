@@ -96,16 +96,16 @@ class PrescriptionFragment() : Fragment(),
         myAdapter.stopListening()
     }
 
-//    companion object {
-//
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            RecyclerViewFragment(movieList, posterTable).apply {
-//                arguments = Bundle().apply {
-//
-//                }
-//            }
-//    }
+    companion object {
+
+       @JvmStatic
+       fun newInstance(param1: String, param2: String) =
+           PrescriptionFragment().apply {
+               arguments = Bundle().apply {
+
+               }
+           }
+    }
 }
 
 

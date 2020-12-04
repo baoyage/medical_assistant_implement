@@ -10,7 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_prescription_detail.view.*
+import kotlinx.android.synthetic.main.prescription_itemlist.view.*
 
 class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query: Query):
     FirebaseRecyclerAdapter<PrescriptionData, PrescriptionListAdapter.PrescriptionViewHolder>(
@@ -29,11 +29,9 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVPresUsername= view?.PresUsername
-        val rVPresDate= view?.PrescriptionDate
-        val rVPresDoctor= view?.PresDoctor
-        val rVPresSpecialty= view?.PresSpec
-        val rVPresImage= view?.prescriptionImage
+        val rVPresUsername= view?.rVUsername
+        val rVPresDate= view?.rVDate
+        val rVPresSpecialty= view?.rVSpecialty
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrescriptionListAdapter.PrescriptionViewHolder {
@@ -47,13 +45,11 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
 
         holder.rVPresUsername!!.text =prescription.username
         holder.rVPresDate!!.text=prescription.prescriptiondate
-        holder.rVPresDoctor!!.text=prescription.doctorname
         holder.rVPresSpecialty!!.text=prescription.specialty
-        val url = prescription.prescriptionpath
-
+        /*val url = prescription.prescriptionpath
         val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
         picasso.load(url).into(holder.rVPresImage)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVPresImage)
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVPresImage)*/
     }
     private val mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val mRef = mDatabase.child("prescription")

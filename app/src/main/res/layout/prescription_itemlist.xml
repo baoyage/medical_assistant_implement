@@ -31,10 +31,10 @@
 
                 <TextView
 
-                    android:id="@+id/rVTitle"
+                    android:id="@+id/rVUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Title"
+                    android:text="Name"
                     android:textSize="18dp">
 
                 </TextView>
@@ -72,7 +72,7 @@
                     android:text="Specialty:" />
 
                 <TextView
-                    android:id="@+id/rVOverview"
+                    android:id="@+id/rVSpecialty"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Specialty" />
