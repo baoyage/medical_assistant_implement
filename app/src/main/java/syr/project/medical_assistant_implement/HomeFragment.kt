@@ -13,8 +13,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.navi_header.view.*
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -66,7 +69,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         }
         )
-
+        updateData()
         val currentTime=DateTimeFormatter
             .ofPattern("yyyyMMdd HH:mm")
             .withLocale(Locale.getDefault())
@@ -88,7 +91,73 @@ class HomeFragment : Fragment(), View.OnClickListener {
 //        Log.i(currentTime.substring(9,11), "currentTime.substring(9,10)currentTime.substring(9,10)")
 
     }
+    fun updateData(){
+        val uid = FirebaseAuth.getInstance().uid
+        if(uid != null){
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            val currentRefKey=FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
 
+            var currentKey=""
+//            currentRefKey.addListenerForSingleValueEvent(object: ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if(snapshot!=null){
+//                        reminder.text= snapshot.child("currentAppointment").value.toString()
+//                    }
+//
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    TODO("Not yet implemented")
+//                }
+//
+//            })
+//
+//            Log.i(currentKey, "currentKeycurrentKeycurrentKeycurrentKey")
+
+
+
+
+
+
+
+
+
+                val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
+            Log.i(profileRef.toString(), "updateData: ")
+
+            profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if(dataSnapshot != null){
+                        currentKey=dataSnapshot.child("currentAppointment").value.toString()
+                        var appointdata=dataSnapshot.child("appointments").child(currentKey)
+
+                        reminder.text = "There is an upcoming appointment with doctor "+appointdata.child("doctorid").value.toString()+
+                                " on "+
+                                appointdata.child("time").value.toString()+
+                                ", "+
+                                appointdata.child("date").value.toString()
+                        if(reminder.text!=""){
+                            noReminder.text=""
+                        }
+                        Log.i(dataSnapshot.key, "dataSnapshot.keydataSnapshot.keydataSnapshot.keydataSnapshot.key")
+
+//                        Log.i(dataSnapshot.child("useremail").value.toString(), "onStart: qwertytyu")
+//                        if(profileEmail.text=="null"){
+//                            profileEmail.text="Email"
+//                        }
+
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+
+                }
+
+            }
+            )
+        }
+    }
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.makeAnAppointment->{

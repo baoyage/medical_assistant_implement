@@ -13,8 +13,13 @@ import kotlinx.android.synthetic.main.fragment_doctor_selected.*
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.fragment_change_username.*
 
-
+data class AppointmentData(val doctorid: String, val date: String, val time: String){
+    constructor():this("", "", "")
+}
 class DoctorSelectedFragment : Fragment() {
     lateinit var myAdapter:DoctorListAdapter
     private var listener: DoctorSelectedFragment.OnRecyclerInteractionListener? = null
@@ -73,7 +78,30 @@ class DoctorSelectedFragment : Fragment() {
 
 
         submit.setOnClickListener{
-            activity!!.finish()
+            val uid = FirebaseAuth.getInstance().uid
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            val profileRef = FirebaseDatabase.getInstance()
+                .reference.child("users").child(firebaseUser!!.uid)
+            val doctorid=1
+            val appointmentData=AppointmentData(
+                doctorid.toString(), input1Text.toString(),
+                input2Text.toString()
+            )
+            var key=profileRef.child("appointments").push().key
+            profileRef.child("currentAppointment").setValue(key)
+
+            profileRef.child("appointments").child(key!!).setValue(appointmentData)
+
+
+
+
+
+
+
+
+            activity!!.supportFragmentManager.beginTransaction()
+                .replace(R.id.makeAnAppointmentContainer, AppointSuccessFragment())
+                .commit()
         }
         dateButton.setOnClickListener{
             // Initialize a new DatePickerFragment

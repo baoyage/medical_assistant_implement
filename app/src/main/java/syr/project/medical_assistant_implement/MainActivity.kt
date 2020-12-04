@@ -97,13 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val profileEmail = headerView.profileEmail
             val profileUserName = headerView.profileUserName
             val profileImage= headerView.profileImage
-//            var currentUid= FirebaseAuth.getInstance().currentUser!!.uid
-//            val ref = FirebaseDatabase.getInstance().reference.child("users")
-//            val currentUserRef = ref!!.child(currentUid)
-//            currentUserRef.child("useremail").setValue(firebaseUser!!.email)
-//            profileEmail.text= firebaseUser!!.email
-//        profileUserName.text=firebaseUser!!.displayName
-//            FirebaseAuth.getInstance().currentUser?.photoUrl
+
 
 
             val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)

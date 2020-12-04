@@ -102,6 +102,17 @@
                             >
 
                             <TextView
+                                android:paddingTop="30dp"
+                                android:id="@+id/reminder"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="reminder"
+                                android:textColor="@color/black"
+                                android:textSize="18dp"/>
+
+                            <TextView
+                                android:id="@+id/noReminder"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
