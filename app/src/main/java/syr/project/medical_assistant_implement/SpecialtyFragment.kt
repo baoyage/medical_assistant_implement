@@ -39,8 +39,8 @@ class SpecialtyFragment : Fragment(),SpecialtyListAdapter.MyItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myAdapter= SpecialtyListAdapter(view.context)
-        prescriptionRcyclerView.layoutManager= GridLayoutManager(context,1)
-        prescriptionRcyclerView.adapter=myAdapter
+        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
+        reportRcyclerView.adapter=myAdapter
         myAdapter.setMyItemClickListener(this)
 
 

@@ -6,26 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_prescription_detail.*
+import java.io.Serializable
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PrescriptionDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+private const val ARG_MOV1 = "prescription"
+private const val ARG_MOV2 = "prescriptionid"
+
 class PrescriptionDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var prescription: PrescriptionData? = null
+    private var prescriptionid:Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        retainInstance=true
+        //setHasOptionsMenu(true)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            prescription = it.getSerializable(ARG_MOV1) as PrescriptionData
+            prescriptionid = it.getInt(ARG_MOV2)
         }
     }
 
@@ -37,22 +36,33 @@ class PrescriptionDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_prescription_detail, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ReportUsername.text=prescription?.username
+        ReportDate.text=prescription?.prescriptiondate
+        ReportDoctor.text=prescription?.doctorname
+        ReportSpec.text=prescription?.specialty
+        val url = prescription?.prescriptionpath
+        val picasso = Picasso.Builder(reportImage.context).listener { _, _, e -> e.printStackTrace() }.build()
+        picasso.load(url).into(reportImage)
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(reportImage)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PrescriptionDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(prescription: PrescriptionData, prescriptionid: Int) =
             PrescriptionDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putSerializable(ARG_MOV1, prescription as Serializable)
+                    putInt(ARG_MOV2, prescriptionid)
                 }
             }
     }

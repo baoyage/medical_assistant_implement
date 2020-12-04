@@ -5,54 +5,102 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.database.FirebaseDatabase
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import kotlinx.android.synthetic.main.fragment_report.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+var queryRep = FirebaseDatabase.getInstance()
+    .reference
+    .child("report")
+    .limitToLast(50)
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReportFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ReportFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ReportFragment() : Fragment(),
+    ReportListAdapter.MyItemClickListener{
+    var idx: Int = 0
+    private var listener: OnRecyclerInteractionListener? = null
+    lateinit var myAdapter: ReportListAdapter
+
+    //override fun onItemClickedFromAdapter(position: Int) {
+    //    idx = position
+    //}
+    interface OnRecyclerInteractionListener {
+        fun onItemClicked(report: ReportData, posterid: Int?)
+    }
+    fun onItemClickedFromRecyclerViewFragment(report: ReportData,posterid: Int?) {
+        listener?.onItemClicked(report,posterid)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        retainInstance=true
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_report, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        myAdapter= ReportListAdapter(ReportData::class.java,queryRep)
+        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
+//        val myAdapter= MyMovieListAdapter(movieList ,posterTable)
+        myAdapter.setMyItemClickListener(this)
+        reportRcyclerView.adapter=myAdapter
+        val alphaAdapter = AlphaInAnimationAdapter(myAdapter)
+        reportRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
+            // Change the durations.
+            setDuration(1000)
+            // Change the interpolator.
+            setInterpolator(OvershootInterpolator())
+            // Disable the first scroll mode.
+            setFirstOnly(false)
+        }
+
+        reportRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
+            addDuration = 1000
+            removeDuration = 100
+            moveDuration = 1000
+            changeDuration = 100
+        }
+
+//        myAdapter.sortItemsByTitle()
+
+    }
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        if (context is OnRecyclerInteractionListener) {
+//            listener = context
+//        } else {
+//            throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
+//        }
+////        toolBarTitle!!.text="Movie List"
+//    }
+
+    override fun onStart() {
+        super.onStart()
+        myAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        myAdapter.stopListening()
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReportFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ReportFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
                 }
             }
     }
