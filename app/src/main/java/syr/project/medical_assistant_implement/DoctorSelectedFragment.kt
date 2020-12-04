@@ -82,7 +82,7 @@ class DoctorSelectedFragment : Fragment() {
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             val profileRef = FirebaseDatabase.getInstance()
                 .reference.child("users").child(firebaseUser!!.uid)
-            val doctorid=1
+            val doctorid=1 //temporary doctorid
             val appointmentData=AppointmentData(
                 doctorid.toString(), input1Text.toString(),
                 input2Text.toString()

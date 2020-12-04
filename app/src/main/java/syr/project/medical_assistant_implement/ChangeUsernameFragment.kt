@@ -37,12 +37,15 @@ class ChangeUsernameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val uid = FirebaseAuth.getInstance().uid
         val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val headerView = activity!!.navView.getHeaderView(0)
+        val profileUserName = headerView.profileUserName
         val profileRef = FirebaseDatabase.getInstance()
             .reference.child("users").child(firebaseUser!!.uid)
         profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if(dataSnapshot != null){
                     currentUsername.text = dataSnapshot.child("username").value.toString()
+                    profileUserName.text = dataSnapshot.child("username").value.toString()
                 }
             }
 

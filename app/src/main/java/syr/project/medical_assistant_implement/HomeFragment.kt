@@ -91,6 +91,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 //        Log.i(currentTime.substring(9,11), "currentTime.substring(9,10)currentTime.substring(9,10)")
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
     fun updateData(){
         val uid = FirebaseAuth.getInstance().uid
         if(uid != null){
@@ -98,28 +103,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             val currentRefKey=FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
 
             var currentKey=""
-//            currentRefKey.addListenerForSingleValueEvent(object: ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    if(snapshot!=null){
-//                        reminder.text= snapshot.child("currentAppointment").value.toString()
-//                    }
-//
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    TODO("Not yet implemented")
-//                }
-//
-//            })
-//
-//            Log.i(currentKey, "currentKeycurrentKeycurrentKeycurrentKey")
-
-
-
-
-
-
-
 
 
                 val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
@@ -131,11 +114,18 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         currentKey=dataSnapshot.child("currentAppointment").value.toString()
                         var appointdata=dataSnapshot.child("appointments").child(currentKey)
 
-                        reminder.text = "There is an upcoming appointment with doctor "+appointdata.child("doctorid").value.toString()+
-                                " on "+
-                                appointdata.child("time").value.toString()+
-                                ", "+
-                                appointdata.child("date").value.toString()
+                        if(appointdata.child("doctorid").value.toString()=="null"){
+                            reminder.text=""
+                        }
+                        else{
+                            reminder.text = "There is an upcoming appointment with doctor "+appointdata.child("doctorid").value.toString()+
+                                    " on "+
+                                    appointdata.child("time").value.toString()+
+                                    ", "+
+                                    appointdata.child("date").value.toString()
+                        }
+
+
                         if(reminder.text!=""){
                             noReminder.text=""
                         }
