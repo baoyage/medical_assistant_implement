@@ -21,7 +21,7 @@ class WikiActivity : YouTubeBaseActivity() {
 
         initUI()
     }
-    
+
     //lateinit var youtubeplayer: YouTubePlayer
     private fun initUI() {
         youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {

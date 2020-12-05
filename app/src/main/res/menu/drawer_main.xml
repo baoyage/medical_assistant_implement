@@ -16,6 +16,9 @@
 
             android:title="Change image" />
         <item
+            android:id="@+id/emergency"
+            android:title="Ask For Emergency"/>
+        <item
             android:id="@+id/signout"
             android:title="Sign Out"/>
 
