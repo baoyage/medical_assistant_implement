@@ -28,9 +28,11 @@ class PrescriptionFragment() : Fragment(),
     val uid = FirebaseAuth.getInstance().uid
     val firebaseUser = FirebaseAuth.getInstance().currentUser
     val queryPre = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid).child("prescription")
-    //override fun onItemClickedFromAdapter(position: Int) {
-    //    idx = position
-    //}
+
+    override fun onItemClickedFromAdapter(position: Int) {
+        idx = position
+    }
+
     interface OnRecyclerInteractionListener {
         fun onItemClicked(prescription: PrescriptionData, posterid: Int?)
     }
@@ -42,14 +44,6 @@ class PrescriptionFragment() : Fragment(),
         super.onCreate(savedInstanceState)
         retainInstance=true
         setHasOptionsMenu(true)
-    }
-
-    override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
-        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
-    }
-
-    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData, prescriptionid: Int?) {
-        listener?.onItemClicked(prescription, prescriptionid!!)
     }
 
     override fun onCreateView(
