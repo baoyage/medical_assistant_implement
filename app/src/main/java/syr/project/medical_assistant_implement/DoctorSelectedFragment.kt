@@ -2,6 +2,7 @@ package syr.project.medical_assistant_implement
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -116,6 +117,11 @@ class DoctorSelectedFragment : Fragment() {
         }
         timeButton.setOnClickListener{
             TimePickerFragment().show(activity!!.supportFragmentManager, "Time Picker")
+        }
+        doctorMap.setOnClickListener{
+            val intent = Intent(activity, MapActivity::class.java)
+            intent.putExtra("action", 0)
+            startActivity(intent)
         }
 
     }

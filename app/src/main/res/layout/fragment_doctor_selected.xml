@@ -73,7 +73,6 @@
                         </TextView>
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -99,6 +98,21 @@
 
                         </TextView>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/doctorMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="map">
+
+                        </Button>
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"

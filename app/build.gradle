@@ -71,4 +71,5 @@ dependencies {
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 }
