@@ -7,7 +7,6 @@ import java.io.Serializable
 class PrescriptionData: Serializable{
 
     var id: Int=-1
-    var userid: Int=-1
     var username: String=""
     var prescriptionpath: String=""
     var prescriptiondate: String=""
