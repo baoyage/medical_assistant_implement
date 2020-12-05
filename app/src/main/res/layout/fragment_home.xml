@@ -300,6 +300,7 @@
                         android:paddingTop="40dp">
 
                         <LinearLayout
+                            android:id="@+id/medicalWiki"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

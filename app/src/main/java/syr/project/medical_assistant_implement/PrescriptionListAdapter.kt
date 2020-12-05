@@ -20,7 +20,6 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     ){
     var myListener: MyItemClickListener? = null
     private var listener: OnRecyclerInteractionListener? = null
-
     interface MyItemClickListener {
         fun onItemClickedFromAdapter(position: Int)
         //fun onItemLongClickedFromAdapter(position: Int)
@@ -31,15 +30,7 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
-        this.myListener = listener
-    }
-
-    /*override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
-        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
-    }*/
-
-    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData, prescriptionid: Int?) {
-        listener?.onItemClicked(prescription, prescriptionid!!)
+//        this.mylistener = listener
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
