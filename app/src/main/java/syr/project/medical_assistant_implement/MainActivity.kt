@@ -77,7 +77,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
+
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -97,13 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val profileEmail = headerView.profileEmail
             val profileUserName = headerView.profileUserName
             val profileImage= headerView.profileImage
-//            var currentUid= FirebaseAuth.getInstance().currentUser!!.uid
-//            val ref = FirebaseDatabase.getInstance().reference.child("users")
-//            val currentUserRef = ref!!.child(currentUid)
-//            currentUserRef.child("useremail").setValue(firebaseUser!!.email)
-//            profileEmail.text= firebaseUser!!.email
-//        profileUserName.text=firebaseUser!!.displayName
-//            FirebaseAuth.getInstance().currentUser?.photoUrl
+
 
 
             val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
@@ -171,6 +173,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 supportFragmentManager.beginTransaction().replace(R.id.meContainer, ChangeUsernameFragment())
                     .addToBackStack(null).commit()
+
             }
             R.id.changePhoneNumber ->{
                 if (mainAct.isDrawerOpen(GravityCompat.START)) {
@@ -182,7 +185,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 //
         }
-//        mainAct.closeDrawer(GravityCompat.START)
+        updateData()
         return true
     }
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -249,6 +252,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
+
+
 
     override fun onBackPressed() {
         if (mainAct.isDrawerOpen(GravityCompat.START)) {

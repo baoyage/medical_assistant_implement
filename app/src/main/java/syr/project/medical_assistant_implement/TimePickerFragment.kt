@@ -14,12 +14,13 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     private lateinit var calendar: Calendar
-
+    lateinit var comm: Communicator
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Initialize a calendar instance
         calendar = Calendar.getInstance()
@@ -27,6 +28,8 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
         // Get the system current date
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
+//        val am_pm = calendar.get(Calendar.AM_PM)
+
 
 
 
@@ -64,8 +67,15 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
         )
     }
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-
+    override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int,) {
+        var timeFormat=String.format("%d : %d", hour, minute)
+//        Toast.makeText(
+//            activity,
+//            "Date Set : $timeFormat"
+//            , Toast.LENGTH_SHORT
+//        ).show()
+        comm = activity as Communicator
+        comm.passDataCom("",timeFormat)
     }
 
     // When date set and press ok button in date picker dialog
@@ -82,14 +92,15 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
 
     // Custom method to format date
-//    private fun formatDate(hour:Int, minute:Int):String{
+//    private fun formatDate(hour:Int, minute:Int,am_pm:Int):String{
 //        // Create a Date variable/object with user chosen date
-//        calendar.set(hour, minute, 0, 0)
-//        val chosenDate = calendar.time
+//        calendar.set(hour, minute, am_pm,0, 0,0)
+//        val chosenTime = calendar.time
 //
 //        // Format the date picker selected date
-//        val df = DateFormat.getDateInstance(DateFormat.MEDIUM)
-//        return df.format(chosenDate)
+//
+//        val df = DateFormat .getDateInstance(DateFormat.MEDIUM)
+//        return df.format(chosenTime)
 //    }
 
 
