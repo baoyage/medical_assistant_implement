@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_health_insurance.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.myToolbar
+import kotlinx.android.synthetic.main.activity_wiki.*
 
 class HealthInsuranceActivity : AppCompatActivity() {
 
@@ -46,6 +47,17 @@ class HealthInsuranceActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    var index = -1;
+    override fun onResume() {
+        super.onResume()
+        insuranceViewPager.currentItem = index
+    }
+
+    override fun onPause() {
+        super.onPause()
+        index = insuranceViewPager.currentItem
     }
 
     //override fun onInsuranceClicked() {

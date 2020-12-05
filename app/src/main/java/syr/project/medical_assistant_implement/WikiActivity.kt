@@ -1,6 +1,5 @@
 package syr.project.medical_assistant_implement
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,7 +13,7 @@ class WikiActivity : YouTubeBaseActivity() {
         val VIDEO_ID: String = "F-W6iHJHXr8";
         val YOUTUBE_API_KEY: String = "AIzaSyA9vlaTnnOYDgTcUvNBxo2cHDHZ47Y_c1E"
     }
-
+    var seekTime = 0;
     lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +21,22 @@ class WikiActivity : YouTubeBaseActivity() {
 
         initUI()
     }
-
+    
+    //lateinit var youtubeplayer: YouTubePlayer
     private fun initUI() {
         youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {
-            override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, youtubePlayer: YouTubePlayer?, p2: Boolean) {
-                youtubePlayer?.loadVideo(VIDEO_ID)
+            override fun onInitializationSuccess(
+                p0: YouTubePlayer.Provider?,
+                youtubeplayer: YouTubePlayer?,
+                p2: Boolean
+            ) {
+                youtubeplayer?.loadVideo(VIDEO_ID)
             }
 
-            override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
+            override fun onInitializationFailure(
+                p0: YouTubePlayer.Provider?,
+                p1: YouTubeInitializationResult?
+            ) {
                 Toast.makeText(applicationContext, "Something went wrong !! ", Toast.LENGTH_SHORT).show()
             }
         }
@@ -38,4 +45,18 @@ class WikiActivity : YouTubeBaseActivity() {
             youtubePlayer.initialize(YOUTUBE_API_KEY, youtubePlayerInit)
         })
     }
+/*
+    override fun onResume() {
+        super.onResume()
+        if (youtubeplayer == null) {
+            initUI()
+        } else {
+            youtubeplayer.loadVideo(VIDEO_ID, seekTime)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        seekTime = youtubeplayer.getCurrentTimeMillis()
+    }*/
 }

@@ -7,32 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.fragment_report.*
 
-var queryRep = FirebaseDatabase.getInstance()
+/*var queryRep = FirebaseDatabase.getInstance()
     .reference
     .child("report")
-    .limitToLast(50)
+    .limitToLast(50)*/
 
 class ReportFragment() : Fragment(),
     ReportListAdapter.MyItemClickListener{
     var idx: Int = 0
     private var listener: OnRecyclerInteractionListener? = null
     lateinit var myAdapter: ReportListAdapter
+    val uid = FirebaseAuth.getInstance().uid
+    val firebaseUser = FirebaseAuth.getInstance().currentUser
+    val queryRep = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid).child("report")
 
     //override fun onItemClickedFromAdapter(position: Int) {
     //    idx = position
     //}
+
     interface OnRecyclerInteractionListener {
         fun onItemClicked(report: ReportData, posterid: Int?)
     }
-    fun onItemClickedFromRecyclerViewFragment(report: ReportData,posterid: Int?) {
-        listener?.onItemClicked(report,posterid)
-    }
+
+    //fun onItemClickedFromRecyclerViewFragment(report: ReportData,posterid: Int?) {
+    //   listener?.onItemClicked(report,posterid)
+    //}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +71,7 @@ class ReportFragment() : Fragment(),
             setFirstOnly(false)
         }
 
-        reportRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
+        reportRcyclerView.itemAnimator = SlideInRightAnimator(OvershootInterpolator()).apply {
             addDuration = 1000
             removeDuration = 100
             moveDuration = 1000
