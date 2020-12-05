@@ -49,20 +49,6 @@
                 app:srcCompat="@drawable/fa_medkit" />
         </FrameLayout>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/BottomNavi"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="start"
-            android:elevation="16dp"
-            app:itemBackground="@color/navi"
-            app:itemTextColor="#000000"
-            app:labelVisibilityMode="labeled"
-            app:layout_anchor="@+id/meContainer"
-            app:layout_anchorGravity="bottom|center"
-            app:menu="@menu/bottom_menu_home" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"

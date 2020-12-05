@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_appointment"
         android:enabled="true"
         android:title="Appointment"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_prescription"
         android:enabled="true"
         android:title="Prescription"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_report"
+        android:enabled="true"
+        android:title="Report"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/action_insurance"
         android:enabled="true"
         android:title="Health Insurance"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_wiki"
         android:enabled="true"
         android:title="Medical Wiki"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 </menu>

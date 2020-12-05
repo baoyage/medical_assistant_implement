@@ -76,30 +76,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(dialIntent);
         }
 
-        BottomNavi.setOnNavigationItemReselectedListener {
-            when(it.itemId){
-                R.id.action_appointment -> {
-                    val intent = Intent(this, MakeAnAppointmentActivity::class.java)
-                    intent.putExtra("action", 0)
-                    startActivity(intent)
-                }
-                R.id.action_insurance->{
-                    val intent = Intent(this, HealthInsuranceActivity::class.java)
-                    intent.putExtra("action", 0)
-                    startActivity(intent)
-                }
-                R.id.action_prescription -> {
-                    val intent = Intent(this, PrescriptionActivity::class.java)
-                    intent.putExtra("action", 0)
-                    startActivity(intent)
-                }
-                R.id.action_wiki ->{
-                    val intent = Intent(this, WikiActivity::class.java)
-                    intent.putExtra("action", 0)
-                    startActivity(intent)
-                }
-            }
-        }
+//        BottomNavi.setOnNavigationItemReselectedListener {
+//            when(it.itemId){
+//                R.id.action_appointment -> {
+//                    val intent = Intent(this, MakeAnAppointmentActivity::class.java)
+//                    intent.putExtra("action", 0)
+//                    startActivity(intent)
+//                }
+//                R.id.action_insurance->{
+//                    val intent = Intent(this, HealthInsuranceActivity::class.java)
+//                    intent.putExtra("action", 0)
+//                    startActivity(intent)
+//                }
+//                R.id.action_prescription -> {
+//                    val intent = Intent(this, PrescriptionActivity::class.java)
+//                    intent.putExtra("action", 0)
+//                    startActivity(intent)
+//                }
+//                R.id.action_wiki ->{
+//                    val intent = Intent(this, WikiActivity::class.java)
+//                    intent.putExtra("action", 0)
+//                    startActivity(intent)
+//                }
+//            }
+//        }
     }
 
 
@@ -167,9 +167,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // inflate the menu into toolbar
 
         val inflater = menuInflater
-        inflater.inflate(R.menu.toolbar_menu_main, menu)
+        inflater.inflate(R.menu.bottom_menu_home, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean{
+        when (item?.itemId) {
+            R.id.action_appointment->{
+                val intent = Intent(this, MakeAnAppointmentActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+            R.id.action_prescription->{
+                val intent = Intent(this, PrescriptionActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+            R.id.action_report->{
+                val intent = Intent(this, ReportActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+            R.id.action_insurance -> {
+                val intent = Intent(this, HealthInsuranceActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+            R.id.action_wiki ->{
+                val intent = Intent(this, WikiActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+
+
+
+        }
+
+
+
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
