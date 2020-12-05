@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
@@ -41,6 +42,19 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     override fun onBindViewHolder(holder: PrescriptionListAdapter.PrescriptionViewHolder, position: Int, prescription: PrescriptionData) {
+        val uid = FirebaseAuth.getInstance().uid
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val profileRef = FirebaseDatabase.getInstance()
+            .reference.child("users").child(firebaseUser!!.uid)
+        val doctorid=0 //temporary doctorid
+        val appointmentData=AppointmentData(
+            doctorid.toString(), input1Text.toString(),
+            input2Text.toString()
+        )
+        var key=profileRef.child("appointments").push().key
+        profileRef.child("currentAppointment").setValue(key)
+
+        profileRef.child("appointments").child(key!!).setValue(appointmentData)
 
         holder.rVPresUsername!!.text =prescription.username
         holder.rVPresDate!!.text=prescription.prescriptiondate

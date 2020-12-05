@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "785065458228",
+    "firebase_url": "https://medical-assistant-implement.firebaseio.com",
+    "project_id": "medical-assistant-implement",
+    "storage_bucket": "medical-assistant-implement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785065458228:android:8002de02b128fca8956861",
+        "android_client_info": {
+          "package_name": "syr.project.medical_assistant_implement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785065458228-4tel2ko2s4sa3t6v797govtjg807johi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "syr.project.medical_assistant_implement",
+            "certificate_hash": "1f6c7b40f0be9321c089d3b674bbef607fd6658e"
+          }
+        },
+        {
+          "client_id": "785065458228-n23plp3g43srnq55p4h35ep6tbrfav50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbrfJRe94-H0Sq4RhNaHnnhVAAlYjEC48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785065458228-n23plp3g43srnq55p4h35ep6tbrfav50.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
