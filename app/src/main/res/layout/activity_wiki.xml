@@ -16,14 +16,9 @@
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play Video" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
         android:gravity="center"
-        android:text="This is GridLayout" />
+        android:text="Play Video" />
 
 
 </GridLayout>
