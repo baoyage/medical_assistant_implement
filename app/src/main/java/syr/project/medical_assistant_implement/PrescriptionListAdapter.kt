@@ -30,7 +30,7 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
-        this.mylistener = listener
+//        this.mylistener = listener
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {

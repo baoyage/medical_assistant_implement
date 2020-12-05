@@ -34,9 +34,9 @@ class PrescriptionFragment() : Fragment(),
     interface OnRecyclerInteractionListener {
         fun onItemClicked(prescription: PrescriptionData, posterid: Int?)
     }
-    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData,posterid: Int?) {
-        listener?.onItemClicked(prescription,posterid)
-    }
+//    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData,posterid: Int?) {
+//        listener?.onItemClicked(prescription,posterid)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +44,9 @@ class PrescriptionFragment() : Fragment(),
         setHasOptionsMenu(true)
     }
 
-    override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
-        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
-    }
+//    override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
+//        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
+//    }
 
     fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData, prescriptionid: Int?) {
         listener?.onItemClicked(prescription, prescriptionid!!)
@@ -115,6 +115,10 @@ class PrescriptionFragment() : Fragment(),
 
                }
            }
+    }
+
+    override fun onItemClickedFromAdapter(position: Int) {
+
     }
 }
 

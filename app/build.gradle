@@ -70,4 +70,5 @@ dependencies {
     implementation 'com.github.FasterXML:jackson-databind:2.6.0-rc3b'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

@@ -50,6 +50,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         healthInsurance.setOnClickListener(this)
         prescription.setOnClickListener(this)
         medicalReport.setOnClickListener(this)
+        medicalWiki.setOnClickListener(this)
         val uid = FirebaseAuth.getInstance().uid
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         val profileRef = FirebaseDatabase.getInstance()
@@ -164,6 +165,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
             R.id.prescription -> {
                 val intent = Intent(activity, PrescriptionActivity::class.java)
+                intent.putExtra("action", 0)
+                startActivity(intent)
+            }
+            R.id.medicalWiki ->{
+                val intent = Intent(activity, WikiActivity::class.java)
                 intent.putExtra("action", 0)
                 startActivity(intent)
             }
