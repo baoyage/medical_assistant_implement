@@ -52,21 +52,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
         medicalReport.setOnClickListener(this)
         medicalWiki.setOnClickListener(this)
         val uid = FirebaseAuth.getInstance().uid
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val profileRef = FirebaseDatabase.getInstance()
-            .reference.child("users").child(firebaseUser!!.uid)
-        profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if(dataSnapshot != null){
-                    homeUsername.text = dataSnapshot.child("username").value.toString()
+        if(uid != null) {
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            val profileRef = FirebaseDatabase.getInstance()
+                .reference.child("users").child(firebaseUser!!.uid)
+            profileRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot != null) {
+                        homeUsername.text = dataSnapshot.child("username").value.toString()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
                 }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
+            )
         }
-        )
         updateData()
         val currentTime=DateTimeFormatter
             .ofPattern("yyyyMMdd HH:mm")
