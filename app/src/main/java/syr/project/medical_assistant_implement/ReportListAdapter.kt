@@ -18,9 +18,14 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
             .build()
     ){
     var myListener: MyItemClickListener? = null
+    private var listener: OnRecyclerInteractionListener? = null
     interface MyItemClickListener {
         //fun onItemClickedFromAdapter(position: Int)
         //fun onItemLongClickedFromAdapter(position: Int)
+    }
+
+    interface OnRecyclerInteractionListener {
+        fun onItemClicked(report: ReportData, reportid: Int)
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
@@ -28,9 +33,9 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
     }
 
     inner class ReportViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVPresUsername= view?.rVRUsername
-        val rVPresDate= view?.rVRDate
-        val rVPresSpecialty= view?.rVRSpecialty
+        val rVRUsername= view?.rVRUsername
+        val rVRDate= view?.rVRDate
+        val rVRSpecialty= view?.rVRSpecialty
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportListAdapter.ReportViewHolder {
@@ -41,10 +46,12 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
     }
 
     override fun onBindViewHolder(holder: ReportListAdapter.ReportViewHolder, position: Int, report: ReportData) {
-
-        holder.rVPresUsername!!.text =report.username
-        holder.rVPresDate!!.text=report.reportdate
-        holder.rVPresSpecialty!!.text=report.specialty
+        if (holder==null) {
+            return
+        }
+            holder.rVRUsername!!.text = report.username
+            holder.rVRDate!!.text = report.reportdate
+            holder.rVRSpecialty!!.text = report.specialty
         /*val url = report.reportpath
         val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
         picasso.load(url).into(holder.rVPresImage)

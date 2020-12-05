@@ -51,9 +51,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().add(R.id.meContainer, HomeFragment()).commit()
 
-
-
-
         val headerView = navView.getHeaderView(0)
         val headerTimeGreetings=headerView.headerTimeGreetings
 
@@ -74,12 +71,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
+        floatingActionButton.setOnClickListener {
+            var dialIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + 911));
+            startActivity(dialIntent);
+        }
 
-
-
-
-
+        BottomNavi.setOnNavigationItemReselectedListener {
+            when(it.itemId){
+                R.id.action_appointment -> {
+                    val intent = Intent(this, MakeAnAppointmentActivity::class.java)
+                    intent.putExtra("action", 0)
+                    startActivity(intent)
+                }
+                R.id.action_insurance->{
+                    val intent = Intent(this, HealthInsuranceActivity::class.java)
+                    intent.putExtra("action", 0)
+                    startActivity(intent)
+                }
+                R.id.action_prescription -> {
+                    val intent = Intent(this, PrescriptionActivity::class.java)
+                    intent.putExtra("action", 0)
+                    startActivity(intent)
+                }
+                R.id.action_wiki ->{
+                    val intent = Intent(this, WikiActivity::class.java)
+                    intent.putExtra("action", 0)
+                    startActivity(intent)
+                }
+            }
+        }
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -92,6 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         updateData()
 
     }
+
     fun updateData(){
         val uid = FirebaseAuth.getInstance().uid
         if(uid != null){
@@ -182,8 +205,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.meContainer, ChangePhoneNumberFragment())
                     .addToBackStack(null).commit()
             }
+            R.id.emergency ->{
+                var dialIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + 911));
+                startActivity(dialIntent);
+            }
 
-//
         }
         updateData()
         return true

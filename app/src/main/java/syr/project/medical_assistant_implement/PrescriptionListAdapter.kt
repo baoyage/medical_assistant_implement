@@ -30,7 +30,7 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
-//        this.mylistener = listener
+        this.myListener = listener
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
@@ -47,10 +47,11 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     override fun onBindViewHolder(holder: PrescriptionListAdapter.PrescriptionViewHolder, position: Int, prescription: PrescriptionData) {
-
-        holder.rVPresUsername!!.text =prescription.username
-        holder.rVPresDate!!.text=prescription.prescriptiondate
-        holder.rVPresSpecialty!!.text=prescription.specialty
+        if (holder!=null) {
+            holder.rVPresUsername!!.text =prescription.username
+            holder.rVPresDate!!.text=prescription.prescriptiondate
+            holder.rVPresSpecialty!!.text=prescription.specialty
+        }
         /*val url = prescription.prescriptionpath
         val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
         picasso.load(url).into(holder.rVPresImage)
