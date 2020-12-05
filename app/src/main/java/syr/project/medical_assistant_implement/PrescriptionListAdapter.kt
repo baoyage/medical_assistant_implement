@@ -19,13 +19,18 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
             .build()
     ){
     var myListener: MyItemClickListener? = null
+    private var listener: OnRecyclerInteractionListener? = null
     interface MyItemClickListener {
-        //fun onItemClickedFromAdapter(position: Int)
+        fun onItemClickedFromAdapter(position: Int)
         //fun onItemLongClickedFromAdapter(position: Int)
     }
 
+    interface OnRecyclerInteractionListener {
+        fun onItemClicked(prescription: PrescriptionData, prescriptionid: Int)
+    }
+
     fun setMyItemClickListener(listener: MyItemClickListener) {
-        this.myListener = listener
+        this.mylistener = listener
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
@@ -37,24 +42,11 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrescriptionListAdapter.PrescriptionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view:View
-        view=layoutInflater.inflate(R.layout.fragment_prescription,parent,false)
+        view=layoutInflater.inflate(R.layout.prescription_itemlist,parent,false)
         return PrescriptionViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PrescriptionListAdapter.PrescriptionViewHolder, position: Int, prescription: PrescriptionData) {
-        val uid = FirebaseAuth.getInstance().uid
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val profileRef = FirebaseDatabase.getInstance()
-            .reference.child("users").child(firebaseUser!!.uid)
-        val doctorid=0 //temporary doctorid
-        val appointmentData=AppointmentData(
-            doctorid.toString(), input1Text.toString(),
-            input2Text.toString()
-        )
-        var key=profileRef.child("appointments").push().key
-        profileRef.child("currentAppointment").setValue(key)
-
-        profileRef.child("appointments").child(key!!).setValue(appointmentData)
 
         holder.rVPresUsername!!.text =prescription.username
         holder.rVPresDate!!.text=prescription.prescriptiondate

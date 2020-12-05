@@ -11,20 +11,23 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.fragment_prescription.*
 
-var queryPre = FirebaseDatabase.getInstance()
+/*var queryPre = FirebaseDatabase.getInstance()
     .reference
     .child("prescriptions")
-    .limitToLast(50)
+    .limitToLast(50)*/
 
 class PrescriptionFragment() : Fragment(),
     PrescriptionListAdapter.MyItemClickListener{
     var idx: Int = 0
     private var listener: OnRecyclerInteractionListener? = null
     lateinit var myAdapter: PrescriptionListAdapter
-
+    val uid = FirebaseAuth.getInstance().uid
+    val firebaseUser = FirebaseAuth.getInstance().currentUser
+    val queryPre = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid).child("prescription")
     //override fun onItemClickedFromAdapter(position: Int) {
     //    idx = position
     //}
@@ -39,6 +42,14 @@ class PrescriptionFragment() : Fragment(),
         super.onCreate(savedInstanceState)
         retainInstance=true
         setHasOptionsMenu(true)
+    }
+
+    override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
+        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
+    }
+
+    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData, prescriptionid: Int?) {
+        listener?.onItemClicked(prescription, prescriptionid!!)
     }
 
     override fun onCreateView(
