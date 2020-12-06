@@ -17,14 +17,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MapActivity"></activity>
-        <activity android:name=".WikiActivity" />
-        <activity android:name=".PrescriptionActivity" />
-        <activity android:name=".ReportActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HealthInsuranceActivity" />
-        <activity android:name=".MakeAnAppointmentActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".appointment.MapActivity"></activity>
+        <activity android:name=".wiki.WikiActivity" />
+        <activity android:name=".prescription.PrescriptionActivity" />
+        <activity android:name=".report.ReportActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".insurance.HealthInsuranceActivity" />
+        <activity android:name=".appointment.MakeAnAppointmentActivity" />
+        <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
