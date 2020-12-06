@@ -26,9 +26,10 @@ class ReportActivity : AppCompatActivity(), ReportFragment.OnRecyclerInteraction
         return true
     }
 
-    override fun onItemClicked(report: ReportData, reportid: Int?) {
+    override fun onItemClicked(position: Int) {
         val appBar = supportActionBar
-        supportFragmentManager.beginTransaction().replace(R.id.reportContainer, ReportDetailFragment.newInstance(report, reportid!!)
+        supportFragmentManager.beginTransaction().replace(R.id.reportContainer, ReportDetailFragment.newInstance(
+            position)
         ).addToBackStack(null).commit()
     }
 }

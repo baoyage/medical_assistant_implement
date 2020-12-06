@@ -1,5 +1,6 @@
 package syr.project.medical_assistant_implement
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,31 +16,25 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
 import kotlinx.android.synthetic.main.fragment_report.*
 
-/*var queryRep = FirebaseDatabase.getInstance()
-    .reference
-    .child("report")
-    .limitToLast(50)*/
-
 class ReportFragment() : Fragment(),
     ReportListAdapter.MyItemClickListener{
-    var idx: Int = 0
     private var listener: OnRecyclerInteractionListener? = null
     lateinit var myAdapter: ReportListAdapter
     val uid = FirebaseAuth.getInstance().uid
     val firebaseUser = FirebaseAuth.getInstance().currentUser
-    val queryRep = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid).child("report")
+    val reportQuery = FirebaseDatabase.getInstance().reference
+        .child("users")
+        .child(firebaseUser!!.uid)
+        .child("reports")
 
-    //override fun onItemClickedFromAdapter(position: Int) {
-    //    idx = position
-    //}
-
-    interface OnRecyclerInteractionListener {
-        fun onItemClicked(report: ReportData, posterid: Int?)
+    override fun onItemClickedFromAdapter(position: Int) {
+        listener?.onItemClicked(position)
     }
 
-    //fun onItemClickedFromRecyclerViewFragment(report: ReportData,posterid: Int?) {
-    //   listener?.onItemClicked(report,posterid)
-    //}
+    interface OnRecyclerInteractionListener {
+        fun onItemClicked(position: Int)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +51,8 @@ class ReportFragment() : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myAdapter= ReportListAdapter(ReportData::class.java,queryRep)
+        myAdapter= ReportListAdapter(ReportData::class.java,reportQuery)
         reportRcyclerView.layoutManager= GridLayoutManager(context,1)
-//        val myAdapter= MyMovieListAdapter(movieList ,posterTable)
         myAdapter.setMyItemClickListener(this)
         reportRcyclerView.adapter=myAdapter
         val alphaAdapter = AlphaInAnimationAdapter(myAdapter)
@@ -77,19 +71,17 @@ class ReportFragment() : Fragment(),
             moveDuration = 1000
             changeDuration = 100
         }
-
-//        myAdapter.sortItemsByTitle()
-
     }
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is OnRecyclerInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
-//        }
-////        toolBarTitle!!.text="Movie List"
-//    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ReportFragment.OnRecyclerInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
+        }
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -101,14 +93,4 @@ class ReportFragment() : Fragment(),
         myAdapter.stopListening()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReportFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
-    }
 }

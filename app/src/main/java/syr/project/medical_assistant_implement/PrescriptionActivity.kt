@@ -14,7 +14,7 @@ class PrescriptionActivity : AppCompatActivity(), PrescriptionFragment.OnRecycle
         val appBar = supportActionBar
         appBar!!.title = "Prescription"
         appBar?.setDisplayHomeAsUpEnabled(true)
-        supportFragmentManager.beginTransaction().add(R.id.layoutContainer, PrescriptionFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.prescriptionContainer, PrescriptionFragment()).commit()
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
@@ -27,9 +27,11 @@ class PrescriptionActivity : AppCompatActivity(), PrescriptionFragment.OnRecycle
         return true
     }
 
-    override fun onItemClicked(prescription: PrescriptionData, prescriptionid: Int?) {
+    override fun onItemClicked(position: Int) {
         val appBar = supportActionBar
-        supportFragmentManager.beginTransaction().replace(R.id.layoutContainer, PrescriptionDetailFragment.newInstance(prescription, prescriptionid!!)
+        supportFragmentManager.beginTransaction().replace(R.id.prescriptionContainer, PrescriptionDetailFragment.newInstance(
+            position!!
+        )
         ).addToBackStack(null).commit()
     }
 

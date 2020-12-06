@@ -39,6 +39,9 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
+        setSupportActionBar(myToolbar)
+        val appBar = supportActionBar
+        appBar!!.title = "Map"
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)

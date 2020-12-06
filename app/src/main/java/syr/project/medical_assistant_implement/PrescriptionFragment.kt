@@ -1,5 +1,6 @@
 package syr.project.medical_assistant_implement
 
+import android.content.Context
 import android.os.Bundle
 import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
@@ -15,30 +16,24 @@ import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.fragment_prescription.*
 
-/*var queryPre = FirebaseDatabase.getInstance()
-    .reference
-    .child("prescriptions")
-    .limitToLast(50)*/
-
 class PrescriptionFragment() : Fragment(),
     PrescriptionListAdapter.MyItemClickListener{
-    var idx: Int = 0
     private var listener: OnRecyclerInteractionListener? = null
     lateinit var myAdapter: PrescriptionListAdapter
     val uid = FirebaseAuth.getInstance().uid
     val firebaseUser = FirebaseAuth.getInstance().currentUser
-    val queryPre = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid).child("prescription")
+    val prescriptionQuery = FirebaseDatabase.getInstance().reference
+        .child("users")
+        .child(firebaseUser!!.uid).
+        child("prescriptions")
 
     override fun onItemClickedFromAdapter(position: Int) {
-        idx = position
+        listener?.onItemClicked(position)
     }
 
     interface OnRecyclerInteractionListener {
-        fun onItemClicked(prescription: PrescriptionData, posterid: Int?)
+        fun onItemClicked( position: Int)
     }
-//    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData,posterid: Int?) {
-//        listener?.onItemClicked(prescription,posterid)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +41,6 @@ class PrescriptionFragment() : Fragment(),
         setHasOptionsMenu(true)
     }
 
-//    override fun onItemClickedFromAdapter(prescription: PrescriptionData, prescriptionid: Int?) {
-//        onItemClickedFromRecyclerViewFragment(prescription, prescriptionid)
-//    }
-
-    fun onItemClickedFromRecyclerViewFragment(prescription: PrescriptionData, prescriptionid: Int?) {
-        listener?.onItemClicked(prescription, prescriptionid!!)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,13 +51,12 @@ class PrescriptionFragment() : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myAdapter= PrescriptionListAdapter(PrescriptionData::class.java,queryPre)
-        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
-//        val myAdapter= MyMovieListAdapter(movieList ,posterTable)
+        myAdapter= PrescriptionListAdapter(PrescriptionData::class.java,prescriptionQuery)
+        prescriptionRcyclerView.layoutManager= GridLayoutManager(context,1)
         myAdapter.setMyItemClickListener(this)
-        reportRcyclerView.adapter=myAdapter
+        prescriptionRcyclerView.adapter=myAdapter
         val alphaAdapter = AlphaInAnimationAdapter(myAdapter)
-        reportRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
+        prescriptionRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
             // Change the durations.
             setDuration(1000)
             // Change the interpolator.
@@ -78,26 +65,29 @@ class PrescriptionFragment() : Fragment(),
             setFirstOnly(false)
         }
 
-        reportRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
+        prescriptionRcyclerView.itemAnimator = SlideInLeftAnimator(OvershootInterpolator()).apply {
             addDuration = 1000
             removeDuration = 100
             moveDuration = 1000
             changeDuration = 100
         }
 
-//        myAdapter.sortItemsByTitle()
-
     }
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is OnRecyclerInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
-//        }
-////        toolBarTitle!!.text="Movie List"
-//    }
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is PrescriptionFragment.OnRecyclerInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
     override fun onStart() {
         super.onStart()
         myAdapter.startListening()
@@ -108,16 +98,7 @@ class PrescriptionFragment() : Fragment(),
         myAdapter.stopListening()
     }
 
-    companion object {
 
-       @JvmStatic
-       fun newInstance(param1: String, param2: String) =
-           PrescriptionFragment().apply {
-               arguments = Bundle().apply {
-
-               }
-           }
-    }
 
 }
 

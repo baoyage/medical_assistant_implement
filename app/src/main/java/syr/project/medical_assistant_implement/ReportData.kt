@@ -8,9 +8,10 @@ class ReportData: Serializable{
 
     var id: Int=-1
     var username: String=""
-    var reportpath: String=""
-    var reportdate: String=""
-    var doctorname: String=""
+    var reportPath: String=""
+    var reportDate: String=""
+    var doctorid: String=""
     var specialty: String=""
+    var location: String=""
 
 }

@@ -18,15 +18,12 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
             .setQuery(query,modelClass)
             .build()
     ){
+
     var myListener: MyItemClickListener? = null
-    private var listener: OnRecyclerInteractionListener? = null
+
     interface MyItemClickListener {
         fun onItemClickedFromAdapter(position: Int)
-        //fun onItemLongClickedFromAdapter(position: Int)
-    }
 
-    interface OnRecyclerInteractionListener {
-        fun onItemClicked(prescription: PrescriptionData, prescriptionid: Int)
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
@@ -34,9 +31,20 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
     }
 
     inner class PrescriptionViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVPresUsername= view?.rVRUsername
-        val rVPresDate= view?.rVRDate
-        val rVPresSpecialty= view?.rVRSpecialty
+        val rVPresLocation= view?.rVPLocation
+        val rVPresDate= view?.rVPDate
+        val rVPresSpecialty= view?.rVPSpecialty
+        init{
+            view!!.setOnClickListener{
+                if(myListener!=null){
+                    if(adapterPosition!= RecyclerView.NO_POSITION){
+
+                        myListener!!.onItemClickedFromAdapter(adapterPosition)
+                    }
+                }
+                true
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrescriptionListAdapter.PrescriptionViewHolder {
@@ -48,16 +56,10 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
 
     override fun onBindViewHolder(holder: PrescriptionListAdapter.PrescriptionViewHolder, position: Int, prescription: PrescriptionData) {
         if (holder!=null) {
-            holder.rVPresUsername!!.text =prescription.username
-            holder.rVPresDate!!.text=prescription.prescriptiondate
+            holder.rVPresLocation!!.text =prescription.location
+            holder.rVPresDate!!.text=prescription.prescriptionDate
             holder.rVPresSpecialty!!.text=prescription.specialty
         }
-        /*val url = prescription.prescriptionpath
-        val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
-        picasso.load(url).into(holder.rVPresImage)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVPresImage)*/
-    }
-    private val mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
-    private val mRef = mDatabase.child("prescription")
 
+    }
 }

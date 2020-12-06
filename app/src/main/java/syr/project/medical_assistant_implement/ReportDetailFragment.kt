@@ -5,16 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_prescription_detail.*
+import kotlinx.android.synthetic.main.fragment_prescription_detail.prescriptionUsername
 import kotlinx.android.synthetic.main.fragment_report_detail.*
 import java.io.Serializable
 
-private const val ARG_MOV1 = "report"
 private const val ARG_MOV2 = "reportid"
 
 class ReportDetailFragment : Fragment() {
 
-    private var report: ReportData? = null
     private var reportid:Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +27,6 @@ class ReportDetailFragment : Fragment() {
         retainInstance=true
         //setHasOptionsMenu(true)
         arguments?.let {
-            report = it.getSerializable(ARG_MOV1) as ReportData
             reportid = it.getInt(ARG_MOV2)
         }
     }
@@ -37,14 +41,42 @@ class ReportDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ReportUsername.text=report?.username
-        ReportDate.text=report?.reportdate
-        ReportDoctor.text=report?.doctorname
-        ReportSpec.text=report?.specialty
-        val url = report?.reportpath
-        val picasso = Picasso.Builder(reportImage.context).listener { _, _, e -> e.printStackTrace() }.build()
-        picasso.load(url).into(reportImage)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(reportImage)
+        val uid = FirebaseAuth.getInstance().uid
+        if(uid != null) {
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+            val profileRef = FirebaseDatabase.getInstance().reference
+                .child("users")
+                .child(firebaseUser!!.uid)
+            profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if(dataSnapshot != null){
+                        reportUsername.text=dataSnapshot.child("username").value.toString()
+                        var reportDetail=dataSnapshot
+                            .child("prescriptions")
+                            .child(reportid.toString())
+
+                        reportDate.text = reportDetail.child("reportDate").value.toString()
+                        reportDoctor.text=reportDetail.child("doctor").value.toString()
+                        reportSpecialty.text=reportDetail.child("specialty").value.toString()
+
+                        Picasso.get().load(reportDetail.child("reportUrl").value.toString()).fit().into(reportImage)
+
+//                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+
+                }
+
+            }
+            )
+
+
+        }
+
     }
 
     override fun onDestroy() {
@@ -57,11 +89,11 @@ class ReportDetailFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(report: ReportData, reportid: Int) =
+        fun newInstance(position: Int) =
             ReportDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_MOV1, report as Serializable)
-                    putInt(ARG_MOV2, reportid)
+
+                    putInt(ARG_MOV2, position)
                 }
             }
     }

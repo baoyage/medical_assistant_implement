@@ -8,9 +8,10 @@ class PrescriptionData: Serializable{
 
     var id: Int=-1
     var username: String=""
-    var prescriptionpath: String=""
-    var prescriptiondate: String=""
-    var doctorname: String=""
+    var prescriptionPath: String=""
+    var prescriptionDate: String=""
+    var doctorid: String=""
     var specialty: String=""
+    var location: String=""
 
 }

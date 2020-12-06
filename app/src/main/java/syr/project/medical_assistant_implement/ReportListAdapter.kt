@@ -18,30 +18,37 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
             .build()
     ){
     var myListener: MyItemClickListener? = null
-    private var listener: OnRecyclerInteractionListener? = null
+
     interface MyItemClickListener {
-        //fun onItemClickedFromAdapter(position: Int)
-        //fun onItemLongClickedFromAdapter(position: Int)
-    }
+        fun onItemClickedFromAdapter(position: Int)
 
-    interface OnRecyclerInteractionListener {
-        fun onItemClicked(report: ReportData, reportid: Int)
     }
-
-    fun setMyItemClickListener(listener: MyItemClickListener) {
+    fun setMyItemClickListener(listener: ReportListAdapter.MyItemClickListener) {
         this.myListener = listener
     }
+
 
     inner class ReportViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
         val rVRUsername= view?.rVRUsername
         val rVRDate= view?.rVRDate
         val rVRSpecialty= view?.rVRSpecialty
+        init{
+            view!!.setOnClickListener{
+                if(myListener!=null){
+                    if(adapterPosition!= RecyclerView.NO_POSITION){
+
+                        myListener!!.onItemClickedFromAdapter(adapterPosition)
+                    }
+                }
+                true
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportListAdapter.ReportViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View
-        view=layoutInflater.inflate(R.layout.fragment_report,parent,false)
+        view=layoutInflater.inflate(R.layout.report_itemlist,parent,false)
         return ReportViewHolder(view)
     }
 
@@ -50,14 +57,10 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
             return
         }
             holder.rVRUsername!!.text = report.username
-            holder.rVRDate!!.text = report.reportdate
+            holder.rVRDate!!.text = report.reportDate
             holder.rVRSpecialty!!.text = report.specialty
-        /*val url = report.reportpath
-        val picasso = Picasso.Builder(holder.itemView.context).listener { _, _, e -> e.printStackTrace() }.build()
-        picasso.load(url).into(holder.rVPresImage)
-        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(holder.rVPresImage)*/
+
     }
-    private val mDatabase: DatabaseReference = FirebaseDatabase.getInstance().reference
-    private val mRef = mDatabase.child("report")
+
 
 }

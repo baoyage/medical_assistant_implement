@@ -51,7 +51,7 @@
                     android:text="Patient name:" />
 
                 <TextView
-                    android:id="@+id/ReportUsername"
+                    android:id="@+id/prescriptionUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
@@ -73,7 +73,7 @@
                     android:text="Date:" />
 
                 <TextView
-                    android:id="@+id/ReportDate"
+                    android:id="@+id/prescriptionDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
@@ -93,7 +93,7 @@
                     android:text="Doctor:" />
 
                 <TextView
-                    android:id="@+id/ReportDoctor"
+                    android:id="@+id/prescriptionDoctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
@@ -113,7 +113,7 @@
                     android:text="Specialty:" />
 
                 <TextView
-                    android:id="@+id/ReportSpec"
+                    android:id="@+id/prescriptionSpecialty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -127,12 +127,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/reportImage"
+                    android:id="@+id/prescriptionImage"
                     android:layout_width="219dp"
                     android:layout_height="300dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/report"
-                    app:srcCompat="@drawable/prescription1" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
