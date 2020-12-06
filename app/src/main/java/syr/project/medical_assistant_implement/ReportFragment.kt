@@ -71,6 +71,9 @@ class ReportFragment() : Fragment(),
             moveDuration = 1000
             changeDuration = 100
         }
+
+
+
     }
 
     override fun onAttach(context: Context) {
