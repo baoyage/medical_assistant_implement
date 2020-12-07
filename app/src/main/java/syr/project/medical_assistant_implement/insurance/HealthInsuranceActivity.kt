@@ -22,7 +22,8 @@ class HealthInsuranceActivity : AppCompatActivity() {
         //supportFragmentManager.beginTransaction().add(R.id.insuranceContainer, HealthInsuranceFragment()).commit()
         //val firebaseUser = FirebaseAuth.getInstance().currentUser
         var insuranceList:Array<String> = resources.getStringArray(R.array.insurance_list)
-        insuranceViewPager.adapter = InsurancePageAdapter(insuranceList, supportFragmentManager,tabLayout)
+        var insuranceOverview:Array<String> = resources.getStringArray(R.array.insurance_description_list)
+        insuranceViewPager.adapter = InsurancePageAdapter(insuranceList, insuranceOverview, supportFragmentManager,tabLayout)
         tabLayout.setupWithViewPager(insuranceViewPager)
         insuranceViewPager.currentItem = 0
 

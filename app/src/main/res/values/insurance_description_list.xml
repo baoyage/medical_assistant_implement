@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="insurance_description_list">
+        <item>AARP was founded in 1958 by Ethel Percy Andrus and Leonard Davis. It is an influential lobbying group in the United States. AARP sells paid memberships, and markets insurance and other services to its members.</item>
+        <item>Aetna is an American managed health care company that sells traditional and consumer directed health care insurance and related services, such as medical, pharmaceutical, dental, behavioral health, long-term care, and disability plans, primarily through employer-paid (fully or partly) insurance and benefit programs, and through Medicare.</item>
+        <item>American Family Insurance, also abbreviated as AmFam, is an American private mutual company that focuses on property, casualty, and auto insurance, and also offers commercial insurance, life, health, and homeowners coverage as well as investment and retirement-planning products.</item>
+        <item>Anthem is a provider of health insurance in the United States. It is the largest for-profit managed health care company in the Blue Cross Blue Shield Association. As of 2018, the company had approximately 40 million members.</item>
+        <item>Cigna is an American worldwide health services organization based in Bloomfield, Connecticut. Its insurance subsidiaries are major providers of medical, dental, disability, life and accident insurance and related products and services, the majority of which are offered through employers and other groups.</item>
+        <item>EmblemHealth is one of the United States\' largest nonprofit health plans. It is headquartered at 55 Water Street in Lower Manhattan, New York City. It is a $10 billion company with 3.1 million members</item>
+        <item>HealthMarkets, formerly known as UICI, is headquartered in North Richland Hills, Texas.</item>
+        <item>Independence Blue Cross (Independence) is a health insurer based in Philadelphia, Pennsylvania, in the United States. Independence is the largest health insurer in the Philadelphia area, serving more than two million people in the region and seven million nationwide.</item>
+        <item>Shelter Insurance Company is a mutual insurance company which focuses on auto, property, business, and life Insurance.</item>
+        <item>State Farm is a large group of insurance companies throughout the United States with corporate headquarters in Bloomington, Illinois.</item>
+        <item>UnitedHealth Group Incorporated is an American for-profit managed health care company based in Minnetonka, Minnesota. It offers health care products and insurance services.</item>
+        <item>WellCare Health Plans is an American health insurance company that provides managed care services primarily through Medicaid, Medicare Advantage and Medicare Prescription Drug plans for more than 6.3 million members across the country.</item>
+
+    </string-array>
+</resources>

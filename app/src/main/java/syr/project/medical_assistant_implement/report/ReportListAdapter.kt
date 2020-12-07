@@ -28,7 +28,7 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
 
 
     inner class ReportViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
-        val rVRUsername= view?.rVRUsername
+        val rVRLocation= view?.rVRLocation
         val rVRDate= view?.rVRDate
         val rVRSpecialty= view?.rVRSpecialty
         init{
@@ -55,7 +55,7 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
         if (holder==null) {
             return
         }
-            holder.rVRUsername!!.text = report.username
+            holder.rVRLocation!!.text = report.location
             holder.rVRDate!!.text = report.reportDate
             holder.rVRSpecialty!!.text = report.specialty
 

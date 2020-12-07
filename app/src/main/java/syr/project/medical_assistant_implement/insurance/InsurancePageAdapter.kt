@@ -6,11 +6,12 @@ import com.google.android.material.tabs.TabLayout
 
 import syr.project.medical_assistant_implement.R
 
-class InsurancePageAdapter(insurance_list :Array<String>, fragmentManager: FragmentManager, tabLayout: TabLayout?
+class InsurancePageAdapter(insurance_list :Array<String>, insurance_overview :Array<String>, fragmentManager: FragmentManager, tabLayout: TabLayout?
 ): androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
     //var insuranceList:Array<String> = context.resources.getStringArray(R.array.insurance_list)
     var insuranceList:Array<String> = insurance_list
+    var insuranceOverview:Array<String> = insurance_overview
     var insuranceIndex = 0
     var posterTable:MutableMap<String, Int> = mutableMapOf()
     init{
@@ -38,7 +39,8 @@ class InsurancePageAdapter(insurance_list :Array<String>, fragmentManager: Fragm
         }
         var insurancename =insuranceList[position]
         var posterid:Int= posterTable[insuranceList[position]]!!
-        return InsuranceViewPagerFragment.newInstance(insurancename, posterid)
+        var insuranceoverview =insuranceOverview[position]
+        return InsuranceViewPagerFragment.newInstance(insurancename, posterid, insuranceoverview)
     }
 
     override fun getCount(): Int {

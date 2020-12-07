@@ -12,7 +12,7 @@ import syr.project.medical_assistant_implement.R
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "insurancename"
 private const val ARG_PARAM2 = "posterid"
-
+private const val ARG_PARAM3 = "insuranceoverview"
 /**
  * A simple [Fragment] subclass.
  * Use the [InsuranceViewPagerFragment.newInstance] factory method to
@@ -22,12 +22,14 @@ class InsuranceViewPagerFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var insurancename: String? = null
     private var posterid: Int = -1
+    private var insuranceoverview: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             insurancename = it.getString(ARG_PARAM1)
             posterid = it.getInt(ARG_PARAM2)
+            insuranceoverview = it.getString(ARG_PARAM3)
         }
     }
 
@@ -35,6 +37,7 @@ class InsuranceViewPagerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         insurancePoster.setImageResource(posterid)
         insuranceName.text= insurancename
+        insuranceOverview.text= insuranceoverview
     }
 
     override fun onCreateView(
@@ -56,11 +59,12 @@ class InsuranceViewPagerFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(insurancename: String, posterid: Int) =
+        fun newInstance(insurancename: String, posterid: Int, insuranceoverview: String) =
             InsuranceViewPagerFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, insurancename)
                     putInt(ARG_PARAM2, posterid)
+                    putString(ARG_PARAM3, insuranceoverview)
                 }
             }
     }
