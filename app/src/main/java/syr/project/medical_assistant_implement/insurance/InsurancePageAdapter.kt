@@ -3,13 +3,11 @@ package syr.project.medical_assistant_implement.insurance
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
-
 import syr.project.medical_assistant_implement.R
 
 class InsurancePageAdapter(insurance_list :Array<String>, insurance_overview :Array<String>, fragmentManager: FragmentManager, tabLayout: TabLayout?
 ): androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-    //var insuranceList:Array<String> = context.resources.getStringArray(R.array.insurance_list)
     var insuranceList:Array<String> = insurance_list
     var insuranceOverview:Array<String> = insurance_overview
     var insuranceIndex = 0

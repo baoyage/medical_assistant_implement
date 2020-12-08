@@ -26,7 +26,6 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
         this.myListener = listener
     }
 
-
     inner class ReportViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
         val rVRLocation= view?.rVRLocation
         val rVRDate= view?.rVRDate
@@ -35,7 +34,6 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
             view!!.setOnClickListener{
                 if(myListener!=null){
                     if(adapterPosition!= RecyclerView.NO_POSITION){
-
                         myListener!!.onItemClickedFromAdapter(adapterPosition)
                     }
                 }
@@ -58,8 +56,5 @@ class ReportListAdapter(var modelClass: Class<ReportData>, var query: Query):
             holder.rVRLocation!!.text = report.location
             holder.rVRDate!!.text = report.reportDate
             holder.rVRSpecialty!!.text = report.specialty
-
     }
-
-
 }

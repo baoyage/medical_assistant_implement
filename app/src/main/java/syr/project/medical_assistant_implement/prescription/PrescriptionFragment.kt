@@ -42,7 +42,6 @@ class PrescriptionFragment() : Fragment(),
         setHasOptionsMenu(true)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,10 +71,7 @@ class PrescriptionFragment() : Fragment(),
             moveDuration = 1000
             changeDuration = 100
         }
-
-
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -90,6 +86,7 @@ class PrescriptionFragment() : Fragment(),
         super.onDetach()
         listener = null
     }
+
     override fun onStart() {
         super.onStart()
         myAdapter.startListening()
@@ -99,9 +96,6 @@ class PrescriptionFragment() : Fragment(),
         super.onStop()
         myAdapter.stopListening()
     }
-
-
-
 }
 
 

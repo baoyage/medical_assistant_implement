@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_appoint_success.*
 import syr.project.medical_assistant_implement.R
 
-
 class AppointSuccessFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +29,9 @@ class AppointSuccessFragment : Fragment() {
         allSet.setOnClickListener {
             activity!!.finish()
         }
-
-
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AppointSuccessFragment().apply {

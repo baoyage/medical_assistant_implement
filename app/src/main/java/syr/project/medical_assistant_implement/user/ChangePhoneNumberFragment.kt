@@ -41,12 +41,11 @@ class ChangePhoneNumberFragment : Fragment() {
                     currentPhoneNumber.text = dataSnapshot.child("phonenumber").value.toString()
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
-        }
-        )
+        })
+
         submit_new_phone_number.setOnClickListener {
             profileRef.child("phonenumber").setValue(phone_number_new.text.toString())
                 .addOnCompleteListener {

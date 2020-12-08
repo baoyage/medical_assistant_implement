@@ -40,13 +40,11 @@ class SpecialtyFragment : Fragment(), SpecialtyListAdapter.MyItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myAdapter= SpecialtyListAdapter(view.context)
-        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
-        reportRcyclerView.adapter=myAdapter
+        specRcyclerView.layoutManager= GridLayoutManager(context,1)
+        specRcyclerView.adapter=myAdapter
         myAdapter.setMyItemClickListener(this)
-
-
-
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnRecyclerInteractionListener) {
@@ -54,16 +52,14 @@ class SpecialtyFragment : Fragment(), SpecialtyListAdapter.MyItemClickListener {
         } else {
             throw RuntimeException(context.toString() + " must implement OnRecyclerInteractionListener")
         }
-//        toolBarTitle!!.text="Movie List"
     }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
-
     companion object {
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             SpecialtyFragment().apply {

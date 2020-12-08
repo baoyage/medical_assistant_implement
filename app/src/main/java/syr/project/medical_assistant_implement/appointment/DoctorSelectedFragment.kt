@@ -15,6 +15,7 @@ import syr.project.medical_assistant_implement.R
 data class AppointmentData(val doctorid: String, val date: String, val time: String){
     constructor():this("", "", "")
 }
+
 class DoctorSelectedFragment : Fragment() {
     lateinit var myAdapter: DoctorListAdapter
     private var listener: OnRecyclerInteractionListener? = null
@@ -22,17 +23,11 @@ class DoctorSelectedFragment : Fragment() {
         fun onDoctorClicked()
     }
 
-    //override fun onItemClickedFromAdapter(){
-    //    listener?.onDoctorClicked()
-    //}
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
         }
-        //dateButton.setOnClickListener(ButtonListener())
     }
 
     override fun onCreateView(
@@ -44,84 +39,52 @@ class DoctorSelectedFragment : Fragment() {
         var input1Text = arguments?.getString("input_1_txt")
         var input2Text = arguments?.getString("input_2_txt")
         Log.i(input1Text, "onViewCreated: onViewCreated:")
-//        if(dateChosen!=null){
-//            dateChosen.text=inputText
-//        }
-
         return rootView
-
-//        return inflater.inflate(R.layout.fragment_doctor_selected, container, false)
-
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        myAdapter= DoctorListAdapter(view.context)
-//        DoctorRcyclerView.layoutManager= GridLayoutManager(context,1)
-//        DoctorRcyclerView.adapter=myAdapter
-//        myAdapter.setMyItemClickListener(this)
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         var input1Text = arguments?.getString("input_1_txt")
         var input2Text = arguments?.getString("input_2_txt")
         dateChosen.text=input1Text
         timeChosen.text=input2Text
-
-
 
         submit.setOnClickListener{
             val uid = FirebaseAuth.getInstance().uid
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             val profileRef = FirebaseDatabase.getInstance()
                 .reference.child("users").child(firebaseUser!!.uid)
-            val doctorid=0 //temporary doctorid
+            val doctorid=0
             val appointmentData= AppointmentData(
                 doctorid.toString(), input1Text.toString(),
                 input2Text.toString()
             )
             var key=profileRef.child("appointments").push().key
             profileRef.child("currentAppointment").setValue(key)
-
             profileRef.child("appointments").child(key!!).setValue(appointmentData)
-
-
-
-
-
-
-
-
             activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.makeAnAppointmentContainer, AppointSuccessFragment())
                 .commit()
         }
+
         dateButton.setOnClickListener{
             // Initialize a new DatePickerFragment
-
             // Show the date picker dialog
             DatePickerFragment().show(activity!!.supportFragmentManager, "Date Picker")
-//            var inputText = arguments?.getString("input_txt")
-//            Log.i(inputText, "onViewCreated: onViewCreated:")
-//            dateChosen.text=inputText
-//            Log.i(MakeAnAppointmentActivity().ddd, "onViewCreated: onViewCreated:")
-
         }
+
         timeButton.setOnClickListener{
             TimePickerFragment().show(activity!!.supportFragmentManager, "Time Picker")
         }
+
         doctorMap.setOnClickListener{
             val intent = Intent(activity, MapActivity::class.java)
             intent.putExtra("action", 0)
             startActivity(intent)
         }
-
     }
-    companion object {
 
-        // TODO: Rename and change types and number of parameters
+    companion object {
         @JvmStatic
         fun newInstance() =
             DoctorSelectedFragment().apply {
@@ -130,20 +93,4 @@ class DoctorSelectedFragment : Fragment() {
                 }
             }
     }
-
-//    fun showDatePickerDialog(context: Context) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            val calendar: Calendar = Calendar.getInstance()
-//            val dialog = DatePickerDialog(context)
-//            dialog.setOnDateSetListener { view, year, month, dayOfMonth ->
-//                calendar.set(year, month, dayOfMonth)
-//                val format = SimpleDateFormat("yyyy-MM-dd")
-//                textView.setText(format.format(calendar.getTime()))
-//                //              textView.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-//            }
-//            val datePicker = dialog.datePicker
-//            datePicker.minDate = calendar.getTimeInMillis()
-//            dialog.show()
-//        }
-//    }
 }

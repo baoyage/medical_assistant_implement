@@ -18,25 +18,22 @@ class DoctorListAdapter (context: Context
         val layoutInflater = LayoutInflater.from(parent.context)
         val view: View
         view= layoutInflater.inflate(R.layout.list_doctor, parent,false)
-
         return DoctorListHolder(view)
     }
 
     inner class DoctorListHolder(view: View) : RecyclerView.ViewHolder(view!!) {
-
-
         val rVDoctorName=view.rVDoctorName
         init{
             view.setOnClickListener{
                 if(myListener!=null){
                     if(adapterPosition!= RecyclerView.NO_POSITION){
-
                         myListener!!.onItemClickedFromAdapter()
                     }
                 }
             }
         }
     }
+
     override fun onBindViewHolder(holder: DoctorListHolder, position: Int) {
         val doctorName="Amani"
         holder.rVDoctorName.text=doctorName
@@ -45,9 +42,11 @@ class DoctorListAdapter (context: Context
     override fun getItemCount(): Int {
         return DoctorList.size
     }
+
     interface MyItemClickListener {
         fun onItemClickedFromAdapter()
     }
+
     fun setMyItemClickListener(listener: DoctorListAdapter.MyItemClickListener) {
         this.myListener=listener
     }

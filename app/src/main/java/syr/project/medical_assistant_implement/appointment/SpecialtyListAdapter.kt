@@ -14,15 +14,13 @@ class SpecialtyListAdapter(context: Context
     var specialtyList:Array<String> = context.resources.getStringArray(R.array.specialties_list)
     var myListener:MyItemClickListener? = null
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialtyListHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view:View
         view= layoutInflater.inflate(R.layout.list_item, parent,false)
-
         return SpecialtyListHolder(view)
     }
+
     inner class SpecialtyListHolder(view: View) : RecyclerView.ViewHolder(view!!) {
         val rVSpecialty=view.rVList
         init{
@@ -35,7 +33,6 @@ class SpecialtyListAdapter(context: Context
                 }
             }
         }
-
     }
 
     override fun onBindViewHolder(holder: SpecialtyListHolder, position: Int) {
@@ -46,9 +43,11 @@ class SpecialtyListAdapter(context: Context
     override fun getItemCount(): Int {
         return specialtyList.size
     }
+
     interface MyItemClickListener {
         fun onItemClickedFromAdapter()
     }
+
     fun setMyItemClickListener(listener: MyItemClickListener) {
         this.myListener=listener
     }

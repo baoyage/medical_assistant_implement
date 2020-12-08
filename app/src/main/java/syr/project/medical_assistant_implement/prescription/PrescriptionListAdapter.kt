@@ -16,12 +16,10 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
             .setQuery(query,modelClass)
             .build()
     ){
-
     var myListener: MyItemClickListener? = null
 
     interface MyItemClickListener {
         fun onItemClickedFromAdapter(position: Int)
-
     }
 
     fun setMyItemClickListener(listener: MyItemClickListener) {
@@ -36,7 +34,6 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
             view!!.setOnClickListener{
                 if(myListener!=null){
                     if(adapterPosition!= RecyclerView.NO_POSITION){
-
                         myListener!!.onItemClickedFromAdapter(adapterPosition)
                     }
                 }
@@ -58,6 +55,5 @@ class PrescriptionListAdapter(var modelClass: Class<PrescriptionData>, var query
             holder.rVPresDate!!.text=prescription.prescriptionDate
             holder.rVPresSpecialty!!.text=prescription.specialty
         }
-
     }
 }

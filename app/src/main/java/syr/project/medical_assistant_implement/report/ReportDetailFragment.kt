@@ -56,7 +56,6 @@ class ReportDetailFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         if(uid != null) {
             val firebaseUser = FirebaseAuth.getInstance().currentUser
-
             val profileRef = FirebaseDatabase.getInstance().reference
                 .child("users")
                 .child(firebaseUser!!.uid)
@@ -74,20 +73,14 @@ class ReportDetailFragment : Fragment() {
 
                         Picasso.get().load(reportDetail.child("reportUrl").value.toString()).fit().into(reportImage)
                         imageUrl=reportDetail.child("reportUrl").value.toString()
-//                        }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
 
-
                 }
-
-            }
-            )
-
-
+            })
         }
+
         reportDownload.setOnClickListener{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 askPermissions()
@@ -95,7 +88,6 @@ class ReportDetailFragment : Fragment() {
                 downloadImage(imageUrl)
             }
         }
-
     }
 
     override fun onDestroy() {
@@ -113,8 +105,6 @@ class ReportDetailFragment : Fragment() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     activity!!,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -143,17 +133,12 @@ class ReportDetailFragment : Fragment() {
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
                 )
-                // MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-
             }
         } else {
             // Permission has already been granted
             downloadImage(imageUrl)
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -164,39 +149,31 @@ class ReportDetailFragment : Fragment() {
             MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // permission was granted, yay!
-                    // Download the Image
+                    // permission was granted, download the Image
                     downloadImage(imageUrl)
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-
                 }
                 return
             }
-            // Add other 'when' lines to check for other
-            // permissions this app might request.
             else -> {
                 // Ignore all other requests.
             }
         }
     }
 
-
     private var msg: String? = ""
     private var lastMsg = ""
 
     private fun downloadImage(url: String) {
         val directory = File(Environment.DIRECTORY_PICTURES)
-
         if (!directory.exists()) {
             directory.mkdirs()
         }
 
         val downloadManager = context!!.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-
         val downloadUri = Uri.parse(url)
-
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 .setAllowedOverRoaming(false)
@@ -246,13 +223,11 @@ class ReportDetailFragment : Fragment() {
         return msg
     }
 
-
     companion object {
         @JvmStatic
         fun newInstance(position: Int) =
             ReportDetailFragment().apply {
                 arguments = Bundle().apply {
-
                     putInt(ARG_MOV2, position)
                 }
             }

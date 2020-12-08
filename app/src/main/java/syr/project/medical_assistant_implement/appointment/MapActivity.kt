@@ -40,7 +40,6 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
         setSupportActionBar(myToolbar)
         val appBar = supportActionBar
         appBar!!.title = "Map"
-
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -51,7 +50,6 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
         if (requestCode == REQUEST_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 fetchLocation()
@@ -80,9 +78,7 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
             )
         } else {
             val task: Task<Location> = fusedLocationProviderClient.lastLocation
-
             task.addOnSuccessListener {
-
                 if (it != null) {
                     currentLocation = it
                     animateZoomInCamera(
@@ -92,11 +88,9 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
                         )
                     )
                 } else {
-
                     val REQUEST_CHECK_STATE = 12300 // any suitable ID
                     val builder = LocationSettingsRequest.Builder()
                         .addLocationRequest(reqSetting)
-
                     val client = LocationServices.getSettingsClient(this)
                     client.checkLocationSettings(builder.build()).addOnCompleteListener { task ->
                         try {
@@ -148,10 +142,8 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
                     fusedLocationProviderClient.removeLocationUpdates(locationUpdates)
                 }
             }
-
         }
     }
-
 
     fun animateZoomInCamera(latLng: LatLng) {
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
@@ -170,7 +162,6 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
         animateZoomInCamera(malaysiaCoordinate)
         mGoogleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         mGoogleMap.uiSettings.isZoomControlsEnabled = true
-
         setUpClusterer()
 
         btnLocate.setOnClickListener {
@@ -181,36 +172,26 @@ class MapActivity : AppCompatActivity(),OnMapReadyCallback, ClusterManager.OnClu
     private fun setUpClusterer() {
         // Position the map.
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(43.04225775103897, -76.14000102553369), 10f))
-
-        // Initialize the manager with the context and the map.
-        // (Activity extends context, so we can pass 'this' in the constructor.)
         mClusterManager = ClusterManager(this, mGoogleMap)
         mClusterManager!!.setOnClusterClickListener(this)
         mClusterManager!!.setOnClusterItemClickListener(this)
-
         // Point the map's listeners at the listeners implemented by the cluster
         // manager.
         mGoogleMap.setOnCameraIdleListener(mClusterManager)
         mGoogleMap.setOnMarkerClickListener(mClusterManager)
-
         // Add cluster items (markers) to the cluster manager.
         addItems()
     }
 
     private fun addItems() {
-
         // Set some lat/lng coordinates to start with.
         var lat = 43.04225775103897
         var lng = -76.14000102553369
-
-
         // Set the title and snippet strings.
         val title = "This is the title"
         val snippet = "and this is the snippet."
-
         val offsetItem = MyClusterItem(lat, lng, title, snippet)
         mClusterManager!!.addItem(offsetItem)
-
     }
 
     override fun onClusterClick(cluster: Cluster<MyClusterItem>?): Boolean {

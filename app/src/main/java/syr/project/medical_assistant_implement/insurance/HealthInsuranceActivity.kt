@@ -9,18 +9,13 @@ import syr.project.medical_assistant_implement.R
 
 class HealthInsuranceActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_insurance)
         setSupportActionBar(myToolbar)
         val appBar = supportActionBar
         appBar!!.title = "Insurance"
-//        appBar.setDisplayShowHomeEnabled(true)
         appBar?.setDisplayHomeAsUpEnabled(true)
-        //supportFragmentManager.beginTransaction().add(R.id.insuranceContainer, HealthInsuranceFragment()).commit()
-        //val firebaseUser = FirebaseAuth.getInstance().currentUser
         var insuranceList:Array<String> = resources.getStringArray(R.array.insurance_list)
         var insuranceOverview:Array<String> = resources.getStringArray(R.array.insurance_description_list)
         insuranceViewPager.adapter = InsurancePageAdapter(insuranceList, insuranceOverview, supportFragmentManager,tabLayout)
@@ -56,11 +51,4 @@ class HealthInsuranceActivity : AppCompatActivity() {
         super.onPause()
         index = insuranceViewPager.currentItem
     }
-
-    //override fun onInsuranceClicked() {
-    //    finish()
-//        val appBar = supportActionBar
-//        supportFragmentManager.beginTransaction().replace(R.id.appointmentContainer, DoctorsRecommendedFragment.newInstance()
-//        ).addToBackStack(null).commit()
-    //}
 }

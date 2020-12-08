@@ -35,7 +35,6 @@ class ReportFragment() : Fragment(),
         fun onItemClicked(position: Int)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance=true
@@ -52,11 +51,11 @@ class ReportFragment() : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myAdapter= ReportListAdapter(ReportData::class.java,reportQuery)
-        reportRcyclerView.layoutManager= GridLayoutManager(context,1)
+        specRcyclerView.layoutManager= GridLayoutManager(context,1)
         myAdapter.setMyItemClickListener(this)
-        reportRcyclerView.adapter=myAdapter
+        specRcyclerView.adapter=myAdapter
         val alphaAdapter = AlphaInAnimationAdapter(myAdapter)
-        reportRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
+        specRcyclerView.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
             // Change the durations.
             setDuration(1000)
             // Change the interpolator.
@@ -65,15 +64,12 @@ class ReportFragment() : Fragment(),
             setFirstOnly(false)
         }
 
-        reportRcyclerView.itemAnimator = SlideInRightAnimator(OvershootInterpolator()).apply {
+        specRcyclerView.itemAnimator = SlideInRightAnimator(OvershootInterpolator()).apply {
             addDuration = 1000
             removeDuration = 100
             moveDuration = 1000
             changeDuration = 100
         }
-
-
-
     }
 
     override fun onAttach(context: Context) {
@@ -85,7 +81,6 @@ class ReportFragment() : Fragment(),
         }
     }
 
-
     override fun onStart() {
         super.onStart()
         myAdapter.startListening()
@@ -95,5 +90,4 @@ class ReportFragment() : Fragment(),
         super.onStop()
         myAdapter.stopListening()
     }
-
 }

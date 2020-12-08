@@ -25,12 +25,10 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
 class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        activity?.title = "Home"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +39,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -67,9 +64,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 override fun onCancelled(error: DatabaseError) {
 
                 }
-            }
-            )
+            })
         }
+
         updateData()
         val currentTime=DateTimeFormatter
             .ofPattern("yyyyMMdd HH:mm")
@@ -86,29 +83,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
         else{
             timeGreetings.text="Good evening, "
         }
-
-
-//        Log.i(currentTime, "DateTimeFormatterDateTimeFormatterDateTimeFormatter")
-//        Log.i(currentTime.substring(9,11), "currentTime.substring(9,10)currentTime.substring(9,10)")
-
     }
 
     override fun onResume() {
         super.onResume()
         updateData()
     }
+
     fun updateData(){
         val uid = FirebaseAuth.getInstance().uid
         if(uid != null){
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             val currentRefKey=FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
-
             var currentKey=""
-
-
                 val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
             Log.i(profileRef.toString(), "updateData: ")
-
             profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if(dataSnapshot != null){
@@ -126,29 +115,19 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                     appointdata.child("date").value.toString()
                         }
 
-
                         if(reminder.text!=""){
                             noReminder.text=""
                         }
                         Log.i(dataSnapshot.key, "dataSnapshot.keydataSnapshot.keydataSnapshot.keydataSnapshot.key")
-
-//                        Log.i(dataSnapshot.child("useremail").value.toString(), "onStart: qwertytyu")
-//                        if(profileEmail.text=="null"){
-//                            profileEmail.text="Email"
-//                        }
-
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
 
-
                 }
-
-            }
-            )
+            })
         }
     }
+
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.makeAnAppointment ->{
@@ -176,14 +155,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 intent.putExtra("action", 0)
                 startActivity(intent)
             }
-
         }
     }
 
-
-
     companion object {
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {

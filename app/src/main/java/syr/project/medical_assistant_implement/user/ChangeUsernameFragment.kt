@@ -29,7 +29,6 @@ class ChangeUsernameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_change_username, container, false)
     }
 
@@ -48,12 +47,11 @@ class ChangeUsernameFragment : Fragment() {
                     profileUserName.text = dataSnapshot.child("username").value.toString()
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
-        }
-        )
+        })
+
         submit_new_username.setOnClickListener{
             profileRef.child("username").setValue(username_new.text.toString())
                 .addOnCompleteListener{
@@ -68,12 +66,6 @@ class ChangeUsernameFragment : Fragment() {
                     }
                 }
         }
-
-
-
-
-
-
     }
 
     companion object {

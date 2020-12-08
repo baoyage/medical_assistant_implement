@@ -23,22 +23,26 @@ class MakeAnAppointmentActivity : AppCompatActivity(),
         appBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction().add(R.id.makeAnAppointmentContainer, SpecialtyFragment()).commit()
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar_menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
     override fun onSpecialtyClicked(){
         val appBar = supportActionBar
         supportFragmentManager.beginTransaction().replace(
             R.id.makeAnAppointmentContainer, DoctorsRecommendedFragment.newInstance()
         ).addToBackStack(null).commit()
     }
+
     override fun onDoctorClicked(){
         val appBar = supportActionBar
         supportFragmentManager.beginTransaction().replace(
@@ -54,8 +58,6 @@ class MakeAnAppointmentActivity : AppCompatActivity(),
         if(editext_2_input!=""){
             timetoset=editext_2_input
         }
-
-
         bundle.putString("input_1_txt",datetoset)
         bundle.putString("input_2_txt",timetoset)
         val transaction = this.supportFragmentManager.beginTransaction()
@@ -67,5 +69,4 @@ class MakeAnAppointmentActivity : AppCompatActivity(),
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction.commit()
     }
-
 }

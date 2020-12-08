@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_forget_password.*
 import syr.project.medical_assistant_implement.R
 
-
 class ForgetPasswordFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +30,6 @@ class ForgetPasswordFragment : Fragment() {
         var mAuth: FirebaseAuth? = null
         submit_forget_verification.setOnClickListener{
             mAuth = FirebaseAuth.getInstance()
-
             mAuth!!.sendPasswordResetEmail(email_forget_password.text.toString())
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -43,7 +41,6 @@ class ForgetPasswordFragment : Fragment() {
                         Toast.makeText(context,task.exception!!.message.toString(),Toast.LENGTH_LONG).show()
                     }
                 }
-
         }
     }
 

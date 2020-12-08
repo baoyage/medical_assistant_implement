@@ -22,27 +22,6 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-
-        /*
-            **** reference source developer.android.com ***
-
-            DatePickerDialog(Context context)
-                Creates a new date picker dialog for the current date using the
-                parent context's default date picker dialog theme.
-
-            DatePickerDialog(Context context, int themeResId)
-                Creates a new date picker dialog for the current date.
-
-            DatePickerDialog(Context context, DatePickerDialog.OnDateSetListener listener,
-            int year, int month, int dayOfMonth)
-                Creates a new date picker dialog for the specified date using the parent
-                context's default date picker dialog theme.
-
-            DatePickerDialog(Context context, int themeResId, DatePickerDialog.OnDateSetListener
-            listener, int year, int monthOfYear, int dayOfMonth)
-                Creates a new date picker dialog for the specified date.
-        */
-
         // Initialize a new date picker dialog and return it
         return DatePickerDialog(
             activity!!, // Context
@@ -55,26 +34,11 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
         )
     }
 
-
     // When date set and press ok button in date picker dialog
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-//        Toast.makeText(
-//            activity,
-//            "Date Set : ${formatDate(year,month,day)}"
-//            , Toast.LENGTH_SHORT
-//        ).show()
         comm = activity as Communicator
         comm.passDataCom(formatDate(year,month,day).toString(),"")
-
-//        MakeAnAppointmentActivity().ddd=formatDate(year,month,day)
-
-//        DoctorSelectedFragment().
-//        dateChosen.text=formatDate(year,month,day)
-
-        // Display the selected date in text view
-//        activity!!.findViewById<TextView>(R.id.text_view).text = formatDate(year,month,day)
     }
-
 
     // Custom method to format date
     private fun formatDate(year:Int, month:Int, day:Int):String{

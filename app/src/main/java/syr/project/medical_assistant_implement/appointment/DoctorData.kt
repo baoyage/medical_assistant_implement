@@ -13,8 +13,4 @@ data class DoctorData(
     @SerializedName("vote_average") val vote_average: Double,
     @SerializedName("location") val location: String,
 
-
-
-
-
 ) : Serializable

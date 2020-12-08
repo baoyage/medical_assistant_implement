@@ -18,12 +18,14 @@ class PrescriptionActivity : AppCompatActivity(),
         appBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction().add(R.id.prescriptionContainer, PrescriptionFragment()).commit()
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar_menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
@@ -37,5 +39,4 @@ class PrescriptionActivity : AppCompatActivity(),
             )
         ).addToBackStack(null).commit()
     }
-
 }

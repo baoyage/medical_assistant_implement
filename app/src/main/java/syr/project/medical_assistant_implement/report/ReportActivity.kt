@@ -16,12 +16,14 @@ class ReportActivity : AppCompatActivity(), ReportFragment.OnRecyclerInteraction
         appBar?.setDisplayHomeAsUpEnabled(true)
         supportFragmentManager.beginTransaction().add(R.id.reportContainer, ReportFragment()).commit()
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
         val inflater = menuInflater
         inflater.inflate(R.menu.toolbar_menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

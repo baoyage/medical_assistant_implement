@@ -16,12 +16,14 @@ class LoginActivity : AppCompatActivity() , LoginFragment.OnFragmentInteractionL
         appBar!!.title = "Login"
         supportFragmentManager.beginTransaction().add(R.id.login_container, LoginFragment()).commit()
     }
+
     override fun onSignUpRoutine(email: String, passwd: String) {
         supportFragmentManager.beginTransaction().replace(
             R.id.login_container,
             SignupFragment.newInstance(email, passwd)
         ).commit()
     }
+
     override fun onSignInRoutine() {
         supportFragmentManager.beginTransaction().replace(
             R.id.login_container,

@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_prescription_detail.*
 import syr.project.medical_assistant_implement.R
 import java.io.File
 
-
 private const val ARG_MOV2 = "prescriptionid"
 private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1
 class PrescriptionDetailFragment : Fragment() {
@@ -42,9 +41,7 @@ class PrescriptionDetailFragment : Fragment() {
         retainInstance=true
         //setHasOptionsMenu(true)
         arguments?.let {
-
             prescriptionid = it.getInt(ARG_MOV2)
-//            Log.i(prescriptionid.toString()+prescriptionid.toString()+prescriptionid.toString(), "prescriptionidprescriptionidprescriptionid")
         }
     }
 
@@ -58,17 +55,12 @@ class PrescriptionDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val uid = FirebaseAuth.getInstance().uid
         if(uid != null){
             val firebaseUser = FirebaseAuth.getInstance().currentUser
-
             val profileRef = FirebaseDatabase.getInstance().reference
                 .child("users")
                 .child(firebaseUser!!.uid)
-
-
-
             profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if(dataSnapshot != null){
@@ -76,25 +68,17 @@ class PrescriptionDetailFragment : Fragment() {
                         var prescriptionDetail=dataSnapshot
                             .child("prescriptions")
                             .child(prescriptionid.toString())
-
                         prescriptionDate.text = prescriptionDetail.child("prescriptionDate").value.toString()
                         prescriptionDoctor.text=prescriptionDetail.child("doctor").value.toString()
                         prescriptionSpecialty.text=prescriptionDetail.child("specialty").value.toString()
-
                         Picasso.get().load(prescriptionDetail.child("prescriptionUrl").value.toString()).fit().into(prescriptionImage)
                         imageUrl=prescriptionDetail.child("prescriptionUrl").value.toString()
-//                        }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
 
-
-
                 }
-
-            }
-            )
+            })
         }
 
         prescriptionDownload.setOnClickListener{
@@ -104,10 +88,7 @@ class PrescriptionDetailFragment : Fragment() {
                 downloadImage(imageUrl)
             }
         }
-
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -117,7 +98,6 @@ class PrescriptionDetailFragment : Fragment() {
         super.onDetach()
     }
 
-
     @TargetApi(Build.VERSION_CODES.M)
     fun askPermissions() {
         if (ContextCompat.checkSelfPermission(
@@ -125,8 +105,6 @@ class PrescriptionDetailFragment : Fragment() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     activity!!,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -155,17 +133,12 @@ class PrescriptionDetailFragment : Fragment() {
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
                 )
-                // MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-
             }
         } else {
             // Permission has already been granted
             downloadImage(imageUrl)
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -176,24 +149,19 @@ class PrescriptionDetailFragment : Fragment() {
             MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // permission was granted, yay!
-                    // Download the Image
+                    // permission was granted, download the Image
                     downloadImage(imageUrl)
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-
                 }
                 return
             }
-            // Add other 'when' lines to check for other
-            // permissions this app might request.
             else -> {
                 // Ignore all other requests.
             }
         }
     }
-
 
     private var msg: String? = ""
     private var lastMsg = ""
@@ -206,7 +174,6 @@ class PrescriptionDetailFragment : Fragment() {
         }
 
         val downloadManager = context!!.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-
         val downloadUri = Uri.parse(url)
 
         val request = DownloadManager.Request(downloadUri).apply {
@@ -258,16 +225,11 @@ class PrescriptionDetailFragment : Fragment() {
         return msg
     }
 
-
-
-
     companion object {
         @JvmStatic
-
         fun newInstance( position: Int) =
             PrescriptionDetailFragment().apply {
                 arguments = Bundle().apply {
-
                     putInt(ARG_MOV2, position)
                 }
             }

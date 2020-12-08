@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         appBar!!.title = "Medical Assistant"
 
         appBar.setDisplayShowHomeEnabled(true)
-//        appBar?.setDisplayHomeAsUpEnabled(true)
-//        appBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#1B82D2")))
         val toggle = ActionBarDrawerToggle(this, mainAct, myToolbar, 0, 0)
         mainAct.addDrawerListener(toggle)
         toggle.syncState()
@@ -76,49 +74,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             headerTimeGreetings.text="Good evening, "
         }
 
-
         floatingActionButton.setOnClickListener {
             var dialIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + 911));
             startActivity(dialIntent);
         }
-
-//        BottomNavi.setOnNavigationItemReselectedListener {
-//            when(it.itemId){
-//                R.id.action_appointment -> {
-//                    val intent = Intent(this, MakeAnAppointmentActivity::class.java)
-//                    intent.putExtra("action", 0)
-//                    startActivity(intent)
-//                }
-//                R.id.action_insurance->{
-//                    val intent = Intent(this, HealthInsuranceActivity::class.java)
-//                    intent.putExtra("action", 0)
-//                    startActivity(intent)
-//                }
-//                R.id.action_prescription -> {
-//                    val intent = Intent(this, PrescriptionActivity::class.java)
-//                    intent.putExtra("action", 0)
-//                    startActivity(intent)
-//                }
-//                R.id.action_wiki ->{
-//                    val intent = Intent(this, WikiActivity::class.java)
-//                    intent.putExtra("action", 0)
-//                    startActivity(intent)
-//                }
-//            }
-//        }
     }
-
 
     override fun onResume() {
         super.onResume()
         updateData()
     }
 
-
     override fun onStart() {
         super.onStart()
         updateData()
-
     }
 
     fun updateData(){
@@ -129,14 +98,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if(firebaseUser.email == null)
                     Log.i(firebaseUser!!.email, "onStart: dsafasddsaf")
             }
+
             Log.i(firebaseUser!!.displayName, "onStart: qwetrtyuyuii")
             val headerView = navView.getHeaderView(0)
             val profileEmail = headerView.profileEmail
             val profileUserName = headerView.profileUserName
             val profileImage= headerView.profileImage
-
-
-
             val profileRef = FirebaseDatabase.getInstance().reference.child("users").child(firebaseUser!!.uid)
 
             profileRef.addListenerForSingleValueEvent(object: ValueEventListener {
@@ -144,34 +111,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     if(dataSnapshot != null){
                         profileEmail.text = dataSnapshot.child("useremail").value.toString()
                         Log.i(dataSnapshot.child("useremail").value.toString(), "onStart: qwertytyu")
-//                        if(profileEmail.text=="null"){
-//                            profileEmail.text="Email"
-//                        }
                         profileUserName.text=dataSnapshot.child("username").value.toString()
-//                        if(profileUserName.text=="null"){
-//                            profileUserName.text=firebaseUser!!.displayName
-//                        }
                         Picasso.get().load(dataSnapshot.child("profileImageUrl").value.toString()).fit().into(profileImage)
                         if(dataSnapshot.child("profileImageUrl").value.toString()=="null"){
                             profileImage.setImageResource(R.drawable._8)
-//                            Picasso.get().load(FirebaseAuth.getInstance().currentUser?.photoUrl.toString()).fit().into(profileImage)
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
 
-
                 }
-
-            }
-            )
+            })
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // inflate the menu into toolbar
-
         val inflater = menuInflater
         inflater.inflate(R.menu.bottom_menu_home, menu)
         return super.onCreateOptionsMenu(menu)
@@ -204,21 +160,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.putExtra("action", 0)
                 startActivity(intent)
             }
-
-
-
         }
-
-
-
-
         return super.onOptionsItemSelected(item)
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
             R.id.signout -> {
                 signOut()
             }
@@ -241,7 +188,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 supportFragmentManager.beginTransaction().replace(R.id.meContainer, ChangeUsernameFragment())
                     .addToBackStack(null).commit()
-
             }
             R.id.changePhoneNumber ->{
                 if (mainAct.isDrawerOpen(GravityCompat.START)) {
@@ -254,11 +200,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var dialIntent = Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + 911));
                 startActivity(dialIntent);
             }
-
         }
         updateData()
         return true
     }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -266,6 +212,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         return super.dispatchTouchEvent(ev)
     }
+
     var selectedPhotoUri: Uri? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -275,10 +222,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             selectedPhotoUri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(this!!.contentResolver, selectedPhotoUri)
             uploadImageToFirebaseStorage()
-//            selectphoto_imageview.setImageBitmap(bitmap)
-//            R.id.changeImage.alpha = 0f // hide button for selected photo imageview
         }
     }
+
     private fun uploadImageToFirebaseStorage() {
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
@@ -293,9 +239,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .addOnFailureListener {
                 Log.d("SignUp", "Failed to upload image to storage: ${it.message}")
             }
-
-
     }
+
     private fun saveImageToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
@@ -306,7 +251,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
     }
 
-
     private fun isLoggedIn() {
         val uid = FirebaseAuth.getInstance().uid // check current uid of authentication!
         if (uid == null) {
@@ -316,15 +260,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
     }
+
     private fun signOut(){
         FirebaseAuth.getInstance().signOut()
-
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
-
-
 
     override fun onBackPressed() {
         if (mainAct.isDrawerOpen(GravityCompat.START)) {
@@ -332,12 +274,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else
             super.onBackPressed()
     }
-
-
-
-
 }
-
-
-
-

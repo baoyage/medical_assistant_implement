@@ -7,18 +7,12 @@ class DoctorList{
     var doctorList: List<DoctorData> = Gson().fromJson(doctors, Array<DoctorData>::class.java).asList()
     var doctorTable:MutableMap<Int, Int> = mutableMapOf()
     init{
-
-
-
         doctorTable[doctorList[0].id]= R.drawable.maledoctor1
         doctorTable[doctorList[1].id]= R.drawable.maledoctor1
         doctorTable[doctorList[2].id]= R.drawable.maledoctor1
         doctorTable[doctorList[3].id]= R.drawable.maledoctor1
         doctorTable[doctorList[4].id]= R.drawable.maledoctor1
         doctorTable[doctorList[5].id]= R.drawable.maledoctor1
-
-
-
     }
 }
 
